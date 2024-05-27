@@ -5,6 +5,7 @@
 <head>
     <title>CourseX - 수강신청</title>
     <link rel="stylesheet" href="./resources/css/index.css"/>
+    <link rel="stylesheet" href="./resources/css/sidebar.css"/>
 </head>
 <body>
 <section id="root">
@@ -14,5 +15,7 @@
     </main>
 </section>
 <a href="hello-servlet">Hello Servlet</a>
+<script src="resources/js/updateSelectedMenu.js"></script>
+<script src="resources/js/loadContent.js"></script>
 </body>
 </html>
