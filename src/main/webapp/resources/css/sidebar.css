@@ -43,7 +43,7 @@
     padding: 10px 0 10px 1rem;
     cursor: pointer;
     transition: 300ms background-color ease-out;
-    font: var(--text-md);
+    font: var(--text-sm);
 }
 
 .sidebar__menu.selected {
