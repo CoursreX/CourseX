@@ -67,4 +67,38 @@ body {
 
 #content {
     flex: 1;
+    display: flex;
+    gap: 24px;
+}
+
+.content__left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.table {
+    width: 800px;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-right: 1px solid var(--grey-scale-table-line);
+    border-bottom: 1px solid var(--grey-scale-table-line);
+    text-align: center;
+    overflow: auto;
+    /*white-space: nowrap;*/
+}
+
+.table__header {
+    position: sticky;
+    top: 0;
+    background-color: var(--grey-scale-table);
+}
+
+.table__cell {
+    height: 35px;
+    border-top: 1px solid var(--grey-scale-table-line);
+    border-left: 1px solid var(--grey-scale-table-line);
+    font: var(--text-exsm);
+    color: var(--grey-scale-90);
 }
