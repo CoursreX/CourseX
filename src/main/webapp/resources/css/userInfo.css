@@ -1,0 +1,21 @@
+#user-info {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 32px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    background-color: var(--grey-scale-10);
+}
+
+.user-info__label {
+    font: var(--label-sm);
+    color: var(--grey-scale-30);
+}
+
+.user-info__value {
+    font: var(--text-md-emphasis);
+    color: var(--grey-scale-75);
+    margin-top: 8px;
+}
