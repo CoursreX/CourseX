@@ -36,7 +36,7 @@
     border: none;
     border-radius: 50px;
     outline: none;
-    background: url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
+    background:url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
     background-color: var(--grey-scale-15);
     -webkit-appearance:none; /* for chrome */
     -moz-appearance:none; /*for firefox*/
@@ -52,4 +52,36 @@
     font: var(--text-md);
     color: var(--grey-scale-transparent-2);
     cursor: pointer;
+}
+
+/* result table */
+.search__result {
+    padding: 40px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-10);
+}
+
+.search__result__table {
+    width: 800px;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-right: 1px solid var(--grey-scale-table-line);
+    border-bottom: 1px solid var(--grey-scale-table-line);
+    text-align: center;
+    overflow: auto;
+    /*white-space: nowrap;*/
+}
+
+.search__result__table__header {
+    position: sticky;
+    top: 0;
+    background-color: var(--grey-scale-table);
+}
+
+.search__result__table__cell {
+    height: 35px;
+    border-top: 1px solid var(--grey-scale-table-line);
+    border-left: 1px solid var(--grey-scale-table-line);
+    font: var(--text-exsm);
+    color: var(--grey-scale-90);
 }
