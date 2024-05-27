@@ -4,7 +4,7 @@ function updateSelectedMenu() {
     menus.forEach(menu => {
         menu.addEventListener('click', (event) => {
             menus.forEach((m) => {
-                const img = event.currentTarget.querySelector('img');
+                const img = m.querySelector('img');
                 img.src = img.getAttribute('data-original-src');
                 m.classList.remove('selected');
             });
