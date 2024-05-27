@@ -22,7 +22,7 @@
                 <option value="2">2</option>
             </select>
         </div>
-        <button class="search__submit">검색</button>
+        <button class="search__button">검색</button>
     </form>
     <div class="search__result">
         <table class="table">

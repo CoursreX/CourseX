@@ -31,15 +31,20 @@
     appearance:none;
 }
 
-.search__submit {
-    padding: 10px 18px;
+.search__button {
+    height: 100%;
+    padding: 0 18px;
     border-radius: 50px;
     border:none;
     outline:none;
     background-color: var(--primary-blue);
-    font: var(--text-md);
+    font: var(--text-sm);
     color: var(--grey-scale-transparent-2);
     cursor: pointer;
+}
+
+.search__button:active {
+    filter: brightness(1.2);
 }
 
 /* result */
