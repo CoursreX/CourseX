@@ -2,7 +2,7 @@
 
 <nav class="sidebar">
     <div class="sidebar__top">
-        <div class="sidebar__header" onclick="loadContent('main.jsp');">
+        <div class="sidebar__header" onclick="unActiveMenu(); loadContent('main.jsp');">
             <img src="${pageContext.request.contextPath}/resources/assets/logo.svg" alt="logo" />
             <h1>CourseX</h1>
         </div>
