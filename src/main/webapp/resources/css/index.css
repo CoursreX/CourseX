@@ -1,0 +1,54 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+:root {
+    /* color */
+    --primary-navi: #042131;
+    --primary-blue: #3f5a7a;
+    --primary-skyblue: rgba(204, 207, 224, 0.5);
+
+    --grey-scale-0: #ffffff;
+    --grey-scale-10: #fbfbfb;
+    --grey-scale-15: #eeeeee;
+    --grey-scale-20: #a9bac6;
+    --grey-scale-30: #92a5b3;
+    --grey-scale-75: #3e4e5b;
+    --grey-scale-90: #22323b;
+    --grey-scale-transparent: rgba(255, 255, 255, 0.7);
+    --grey-scale-transparent-2: rgba(255, 255, 255, 0.9);
+
+    /* font */
+    --title-lg: 600 24px 'Pretendard', sans-serif;
+    --text-md: 400 16px 'Pretendard', sans-serif;
+}
+
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+form,
+input,
+button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    background: linear-gradient(0deg, rgba(204, 207, 224, 0.5), rgba(204, 207, 224, 0.5)), #FFFFFF;
+}
+
+#root {
+    display: flex;
+    gap: 2rem;
+}
+
+.content {
+    flex: 1;
+}
