@@ -15,10 +15,26 @@
     --grey-scale-90: #22323b;
     --grey-scale-transparent: rgba(255, 255, 255, 0.7);
     --grey-scale-transparent-2: rgba(255, 255, 255, 0.9);
+    --grey-scale-table: #F5F5F5;
+    --grey-scale-table-line: #E7EAF2;
+
 
     /* font */
+    --title-exlg: 700 32px 'Pretendard', sans-serif;
     --title-lg: 600 24px 'Pretendard', sans-serif;
+    --title-md: 600 18px 'Pretendard', sans-serif;
+
+    --text-exlg: 400 24px 'Pretendard', sans-serif;
+    --text-lg: 400 20px 'Pretendard', sans-serif;
     --text-md: 400 16px 'Pretendard', sans-serif;
+    --text-md-emphasis: 600 16px 'Pretendard', sans-serif;
+    --text-sm: 400 14px 'Pretendard', sans-serif;
+    --text-exsm: 400 13px 'Pretendard', sans-serif;
+    --text-exsm-emphasis: 600 13px 'Pretendard', sans-serif;
+
+
+    --label-md: 500 14px 'Pretendard', sans-serif;
+    --label-sm: 500 12px 'Pretendard', sans-serif;
 }
 
 div,
@@ -49,6 +65,6 @@ body {
     gap: 2rem;
 }
 
-.content {
+#content {
     flex: 1;
 }
