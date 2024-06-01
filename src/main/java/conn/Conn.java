@@ -33,7 +33,6 @@ public class Conn {
             System.out.println("오라클 연결 실패");
             e.printStackTrace();
         }
-        System.out.println(rs);
         return rs; // 항상 ResultSet을 반환합니다.
     }
 }
