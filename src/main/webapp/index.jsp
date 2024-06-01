@@ -4,9 +4,11 @@
 <html>
 <head>
     <title>CourseX - 수강신청</title>
+    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="./resources/css/index.css" />
     <link rel="stylesheet" href="./resources/css/sidebar.css" />
     <link rel="stylesheet" href="./resources/css/search.css" />
+    <link rel="stylesheet" href="./resources/css/enroll.css"/>
     <link rel="stylesheet" href="./resources/css/userInfo.css" />
     <link rel="stylesheet" href="./resources/css/cancel.css" />
 </head>

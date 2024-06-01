@@ -1,6 +1,6 @@
 // 라디오 버튼 선택에 따라 검색 입력칸 표시/숨김 처리
 function handleRadio(event) {
-    const searchFilterElements = document.querySelectorAll('.search__filter__element');
+    const searchFilterElements = document.querySelectorAll('.enroll__filter__element');
 
     searchFilterElements.forEach(element => element.style.display = 'none');
 
