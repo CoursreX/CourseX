@@ -5,7 +5,7 @@ $(document).ready(function() {
         const semester = $('#semester').val();
 
         $.ajax({
-            url: 'http://localhost:8080/CourseX_war_exploded/ajax/enrollSearch.jsp',
+            url: 'http://localhost:8080/CourseX_war_exploded/ajax/getEnrollInfo.jsp',
             type: 'GET',
             data: {
                 year: year,
@@ -21,17 +21,3 @@ $(document).ready(function() {
         });
     });
 });
-
-
-function handleRadio(event) {
-    const searchFilterElements = document.querySelectorAll('.search__filter__element');
-    searchFilterElements.forEach(element => element.style.display = 'none');
-
-    if(event.target.value === 'code') {
-        searchFilterElements[0].style.display = 'block';
-    } else if(event.target.value === 'name') {
-        searchFilterElements[1].style.display = 'block';
-    } else if(event.target.value === 'category') {
-        searchFilterElements[2].style.display = 'block';
-    }
-}
