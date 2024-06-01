@@ -1,0 +1,77 @@
+.login__layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.login__container {
+    width: 900px; /* 너비를 크게 설정 */
+    height: 600px; /* 높이를 크게 설정 */
+    background-color: var(--primary-navi); /* 더 짙은 남색 배경 */
+    border-radius: 15px; /* 모서리 둥글게 */
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: var(--grey-scale-0); /* 텍스트 색상을 흰색으로 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login__container input[type="text"],
+.login__container input[type="password"] {
+    width: 40%;
+    padding: 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font: var(--title-md); /* 글꼴 크기를 조금 더 크게 설정 */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login__container input[type="submit"] {
+    width: 30%;
+    padding: 20px;
+    margin: 10px 5%;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-blue); /* 버튼 색깔 */
+    color: white;
+    font-size: 16px; /* 버튼 글꼴 크기를 조금 더 크게 설정 */
+    cursor: pointer;
+}
+.login__container input[type="submit"]:hover {
+    background-color: var(--grey-scale-30); /* 버튼 hover 색상 */
+}
+
+.login__title {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.login__title h1 {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Pretendard', sans-serif;/* 글꼴 변경 */
+    padding-top: 17px;
+
+}
+
+.login__title p {
+    font: var(--text-sm);
+    padding-left: 5px;
+}
+
+.login__logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.login__logo img {
+    width: 100px;
+    height: auto;
+}

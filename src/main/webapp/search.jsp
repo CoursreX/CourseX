@@ -1,17 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="conn.Conn" %>
 
 <div class="content__left">
-    <form class="search__filter">
+    <form id="searchForm" class="search__filter">
         <div class="search__filter__element">
             <label for="year">학년도</label>
             <select id="year" name="year">
                 <option value="none" disabled>학년도</option>
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
-                <option value="2023">2022</option>
-                <option value="2023">2021</option>
-                <option value="2023">2020</option>
-                <option value="2023">2019</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
             </select>
         </div>
         <div class="search__filter__element">
@@ -39,326 +41,44 @@
                 <th class="table__cell">신청결과</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table__body">
+                <%
+                    // 학년도와 학기 정보가 없을 경우 기본 값 설정
+                    Calendar cal = Calendar.getInstance();
+                    int year = cal.get(Calendar.YEAR);
+                    int currentMonth = cal.get(Calendar.MONTH) + 1; // Calendar.MONTH는 0부터 시작하므로 1을 더해줌
+                    int semester = currentMonth >= 2 && currentMonth <= 7 ? 1 : 2;
+
+                    Conn conn = new Conn();
+                    ResultSet rs = null;
+
+                    try {
+                        rs = conn.getEnrollInfo(year, semester);
+                        while (rs.next()) {
+                %>
                 <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
+                    <td class="table__cell"><%= rs.getString("COURSE_ID") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_NAME") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_NO") %></td>
+                    <td class="table__cell"><%= rs.getInt("COURSE_CREDIT") %></td>
+                    <td class="table__cell"><%= rs.getString("FACULTY_NAME") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_DAY") %> <%= rs.getString("COURSE_TIME") %></td>
+                    <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
+                    <td class="table__cell"><%= rs.getString("ENROLL_STAT") %></td>
                 </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">000</td>
-                </tr>
+                <%
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            if (rs != null) rs.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                %>
             </tbody>
         </table>
     </div>
