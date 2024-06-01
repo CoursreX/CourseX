@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="sidebar__bottom">
-        <div class="sidebar__logout">
+        <div class="sidebar__logout" onclick="loadContent('logout.jsp');" >
             <img src="${pageContext.request.contextPath}/resources/assets/logout.svg" alt="로그아웃"/>
             <div>로그아웃</div>
         </div>
