@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +8,7 @@
     <link rel="stylesheet" href="./resources/css/search.css" />
     <link rel="stylesheet" href="./resources/css/userInfo.css" />
     <link rel="stylesheet" href="./resources/css/cancel.css" />
+    <link rel="stylesheet" href="./resources/css/login.css" />
 </head>
 <body>
 <section id="root">
