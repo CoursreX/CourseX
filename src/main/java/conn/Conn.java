@@ -12,9 +12,9 @@ public class Conn {
     public void check_conn() {
         try {
             Class.forName(driver);
-            System.out.println("2013882 jdbc driver 로딩 성공");
+            System.out.println("COURSEX jdbc driver 로딩 성공");
             myConn = DriverManager.getConnection(url, user, password);
-            System.out.println("2013882 오라클 연결 성공");
+            System.out.println("COURSEX 오라클 연결 성공");
             myConn.createStatement();
         } catch(ClassNotFoundException e) {
             System.out.println("jdbc driver 로딩 실패");
