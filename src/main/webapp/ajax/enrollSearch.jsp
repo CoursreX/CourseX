@@ -5,7 +5,6 @@
 <%
     String yearParam = request.getParameter("year");
     String semesterParam = request.getParameter("semester");
-    String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
 
     int year = Integer.parseInt(yearParam);
     int semester = Integer.parseInt(semesterParam);
@@ -14,7 +13,7 @@
     ResultSet rs = null;
 
     try {
-        rs = conn.getEnrollInfo(sql, year, semester);
+        rs = conn.getEnrollInfo(year, semester);
         while (rs.next()) {
 %>
 <tr>
