@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="conn.Conn" %>
 
 <div class="content__left">
     <div class="cancel__list">
@@ -17,19 +19,56 @@
                 <th class="table__cell">취소신청</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td class="table__cell">1234567</td>
-                <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                <td class="table__cell">1</td>
-                <td class="table__cell">3</td>
-                <td class="table__cell">박숙영</td>
-                <td class="table__cell">명신520</td>
-                <td class="table__cell">화, 목 9:00-10:15</td>
-                <td class="table__cell">000</td>
-                <td class="table__cell">0000.00.00</td>
-                <td class="table__cell"><button class="cancel__button">신청</button></td>
-            </tr>
+            <tbody class="table__body">
+                <%
+                    Conn conn = new Conn();
+                    ResultSet rs = null;
+
+                    try {
+                        rs = conn.getCancelEnrollInfo();
+                        while (rs.next()) {
+                %>
+                <tr>
+                    <td class="table__cell"><%= rs.getString("COURSE_ID") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_NAME") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_NO") %></td>
+                    <td class="table__cell"><%= rs.getInt("COURSE_CREDIT") %></td>
+                    <td class="table__cell"><%= rs.getString("FACULTY_NAME") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
+                    <td class="table__cell"><%= rs.getString("COURSE_TIME") %></td>
+                    <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
+                    <td class="table__cell"><%= rs.getString("CANCEL_DATE") %></td>
+                    <td class="table__cell">
+                    <%
+                            if(rs.getInt("ENROLL_STAT") == 2) {
+                    %>
+                        취소완료
+                    <%
+                            } else {
+                    %>
+                        <button class="cancel__enroll__button"
+                                data-enroll-id="<%= rs.getString("ENROLL_ID")%>"
+                                data-course-name="<%= rs.getString("COURSE_NAME")%>"
+                                data-course-no="<%= rs.getInt("COURSE_NO")%>">
+                            취소
+                        </button>
+                    <%
+                            }
+                        }
+                    %>
+                    </td>
+                </tr>
+                <%
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            if (rs != null) rs.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                %>
             </tbody>
         </table>
     </div>
