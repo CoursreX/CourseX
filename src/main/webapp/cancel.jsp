@@ -23,9 +23,10 @@
                 <%
                     Conn conn = new Conn();
                     ResultSet rs = null;
+                    String studentId = (String) session.getAttribute("user");
 
                     try {
-                        rs = conn.getCancelEnrollInfo();
+                        rs = conn.getCancelEnrollInfo(studentId);
                         while (rs.next()) {
                 %>
                 <tr>

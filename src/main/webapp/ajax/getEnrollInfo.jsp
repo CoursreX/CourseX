@@ -3,6 +3,7 @@
 <%@ page import="conn.Conn" %>
 
 <%
+    String studentId = (String) session.getAttribute("user");
     String yearParam = request.getParameter("year");
     String semesterParam = request.getParameter("semester");
 
@@ -13,7 +14,7 @@
     ResultSet rs = null;
 
     try {
-        rs = conn.getEnrollInfo(year, semester);
+        rs = conn.getEnrollInfo(studentId, year, semester);
         while (rs.next()) {
 %>
 <tr>
