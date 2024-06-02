@@ -26,6 +26,7 @@ FROM ENROLL E
          JOIN FACULTY F ON C.faculty_id = F.faculty_id
 WHERE E.student_id = v_student_id
   AND E.enroll_year = v_enroll_year
-  AND E.enroll_sem = v_enroll_sem;
+  AND E.enroll_sem = v_enroll_sem
+  AND E.ENROLL_STAT IN (0, 1);
 END;
 /
