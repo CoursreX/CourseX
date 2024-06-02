@@ -8,9 +8,8 @@ public class Conn {
     String user = "coursex";
     String password = "0000";
 
-    public ResultSet getEnrollInfo(int year, int semester) {
+    public ResultSet getEnrollInfo(String studentId, int year, int semester) {
         ResultSet rs = null; // ResultSet을 초기화합니다.
-        String student_id = "S001";
         String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
 
         try {
@@ -18,7 +17,7 @@ public class Conn {
             Connection myConn = DriverManager.getConnection(url, user, password);
             CallableStatement cstmt = myConn.prepareCall(sql);
 
-            cstmt.setString(1, student_id);
+            cstmt.setString(1, studentId);
             cstmt.setInt(2, year == 0 ? 2024 : year);
             cstmt.setInt(3, semester == 0 ? 1 : semester);
             cstmt.registerOutParameter(4, Types.REF_CURSOR);
@@ -58,9 +57,8 @@ public class Conn {
         }
     }
 
-    public ResultSet getCancelEnrollInfo() {
+    public ResultSet getCancelEnrollInfo(String studentId) {
         ResultSet rs = null;
-        String student_id = "S001";
         String sql = "SELECT " +
                 "E.ENROLL_ID AS ENROLL_ID, " +
                 "E.ENROLL_STAT AS ENROLL_STAT, " +
@@ -94,7 +92,7 @@ public class Conn {
             Connection myConn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = myConn.prepareStatement(sql);
 
-            pstmt.setString(1, student_id);
+            pstmt.setString(1, studentId);
             rs = pstmt.executeQuery();
         } catch (ClassNotFoundException e) {
             System.out.println("JDBC 드라이버 로딩 실패");
