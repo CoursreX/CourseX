@@ -44,16 +44,17 @@
             <tbody class="table__body">
                 <%
                     // 학년도와 학기 정보가 없을 경우 기본 값 설정
+                    String studentId = (String) session.getAttribute("user");
                     Calendar cal = Calendar.getInstance();
-                    int year = cal.get(Calendar.YEAR);
+                    int currentYear = cal.get(Calendar.YEAR);
                     int currentMonth = cal.get(Calendar.MONTH) + 1; // Calendar.MONTH는 0부터 시작하므로 1을 더해줌
-                    int semester = currentMonth >= 2 && currentMonth <= 7 ? 1 : 2;
+                    int currentSemester = currentMonth >= 2 && currentMonth <= 7 ? 1 : 2;
 
                     Conn conn = new Conn();
                     ResultSet rs = null;
 
                     try {
-                        rs = conn.getEnrollInfo(year, semester);
+                        rs = conn.getEnrollInfo(studentId, currentYear, currentSemester);
                         while (rs.next()) {
                 %>
                 <tr>
@@ -65,7 +66,16 @@
                     <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
                     <td class="table__cell"><%= rs.getString("COURSE_DAY") %> <%= rs.getString("COURSE_TIME") %></td>
                     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
-                    <td class="table__cell"><%= rs.getString("ENROLL_STAT") %></td>
+                    <%
+                        String enrollStat = rs.getString("ENROLL_STAT"); // ENROLL_STAT 값 가져오기
+                        String colorClass = ""; // 초기 클래스 값
+
+                        // ENROLL_STAT 값에 따라 클래스 선택
+                        if (enrollStat.equals("신청완료")) {
+                            colorClass = "enroll__success";
+                        }
+                    %>
+                    <td class="table__cell <%= colorClass %>"><%= rs.getString("ENROLL_STAT") %></td>
                 </tr>
                 <%
                         }
@@ -83,6 +93,6 @@
         </table>
     </div>
 </div>
-<div id="content__right">
+<div class="content__right">
     <%@ include file="/views/userInfo.jsp" %>
 </div>

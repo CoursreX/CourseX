@@ -4,7 +4,7 @@
     background-color: var(--grey-scale-10);
 }
 
-.cancel__button {
+.cancel__enroll__button {
     padding: 4px 14px;
     border-radius: 50px;
     background-color: var(--primary-blue);
@@ -15,6 +15,6 @@
     cursor: pointer;
 }
 
-.cancel__button:active {
+.cancel__enroll__button:active {
     filter: brightness(1.2);
 }
