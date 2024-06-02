@@ -44,16 +44,17 @@
             <tbody class="table__body">
                 <%
                     // 학년도와 학기 정보가 없을 경우 기본 값 설정
+                    String studentId = (String) session.getAttribute("user");
                     Calendar cal = Calendar.getInstance();
-                    int year = cal.get(Calendar.YEAR);
+                    int currentYear = cal.get(Calendar.YEAR);
                     int currentMonth = cal.get(Calendar.MONTH) + 1; // Calendar.MONTH는 0부터 시작하므로 1을 더해줌
-                    int semester = currentMonth >= 2 && currentMonth <= 7 ? 1 : 2;
+                    int currentSemester = currentMonth >= 2 && currentMonth <= 7 ? 1 : 2;
 
                     Conn conn = new Conn();
                     ResultSet rs = null;
 
                     try {
-                        rs = conn.getEnrollInfo(year, semester);
+                        rs = conn.getEnrollInfo(studentId, currentYear, currentSemester);
                         while (rs.next()) {
                 %>
                 <tr>
@@ -92,6 +93,6 @@
         </table>
     </div>
 </div>
-<div id="content__right">
+<div class="content__right">
     <%@ include file="/views/userInfo.jsp" %>
 </div>
