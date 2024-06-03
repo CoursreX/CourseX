@@ -8,7 +8,7 @@ public class Conn {
     String user = "coursex";
     String password = "0000";
 
-    public ResultSet getEnrollInfo(String studentId, int year, int semester) {
+    public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
         ResultSet rs = null; // ResultSet을 초기화합니다.
         String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
 
