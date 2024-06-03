@@ -37,7 +37,7 @@
     </div>
 
     <!-- 검색 결과 테이블-->
-    <div class="search__result">
+    <div class="content__left__container">
         <table class="table">
             <thead class="table__header">
             <tr>
