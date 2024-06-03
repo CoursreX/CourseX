@@ -5,7 +5,7 @@ $(document).ready(function() {
         const semester = $('#semester').val();
 
         $.ajax({
-            url: 'http://localhost:8080/CourseX_war_exploded/ajax/getEnrollInfo.jsp',
+            url: 'http://localhost:8080/CourseX_war_exploded/ajax/getEnrollInfoAll.jsp',
             type: 'GET',
             data: {
                 year: year,

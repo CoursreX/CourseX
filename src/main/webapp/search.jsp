@@ -54,7 +54,7 @@
                     ResultSet rs = null;
 
                     try {
-                        rs = conn.getEnrollInfo(studentId, currentYear, currentSemester);
+                        rs = conn.getEnrollInfoAll(studentId, currentYear, currentSemester);
                         while (rs.next()) {
                 %>
                 <tr>
