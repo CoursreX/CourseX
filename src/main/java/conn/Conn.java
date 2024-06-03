@@ -26,10 +26,10 @@ public class Conn {
 
             rs = (ResultSet) cstmt.getObject(4);
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollInfoAll - 수강정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
@@ -51,10 +51,10 @@ public class Conn {
             cstmt.execute();
             updatedCreditLimit = cstmt.getInt(1);
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("cancelEnroll - 수강취소 실패");
             e.printStackTrace();
         }
         return updatedCreditLimit;
@@ -95,10 +95,10 @@ public class Conn {
             pstmt.setString(1, studentId);
             rs = pstmt.executeQuery();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollInfoSuccess - 수강신청 성공 정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
@@ -118,10 +118,10 @@ public class Conn {
             pstmt.setString(1, enrollId);
             pstmt.executeUpdate();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("dropEnroll - 수강포기 실패");
             e.printStackTrace();
         }
     }
@@ -164,39 +164,12 @@ public class Conn {
             pstmt.setString(1, studentId);
             rs = pstmt.executeQuery();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollDropInfo - 수강포기 정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
-    }
-
-    public int updateCreditLimit(String studentId, String courseId, String action) {
-        int updatedCreditLimit = -1;
-        String sql = "{? = call UPDATE_CREDIT_LIMIT(?, ?, ?)}";
-
-        try {
-            Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            CallableStatement cstmt = myConn.prepareCall(sql);
-
-            cstmt.registerOutParameter(1, Types.NUMERIC);
-            cstmt.setString(2, studentId);
-            cstmt.setString(3, courseId);
-            cstmt.setString(4, action);
-            cstmt.execute();
-
-            updatedCreditLimit = cstmt.getInt(1);
-        } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
-            e.printStackTrace();
-        }
-
-        return updatedCreditLimit;
     }
 }
