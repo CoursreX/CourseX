@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,5 +27,6 @@
 <script src="resources/js/cancelEnroll.js" ></script>
 <script src="resources/js/getEnrollInfoAll.js" ></script>
 <script src="resources/js/dropEnroll.js" ></script>
+<script src="resources/js/logout.js" ></script>
 </body>
 </html>
