@@ -21,12 +21,12 @@
                      alt="수강조회" />
                 <div>수강조회</div>
             </div>
-            <div class="sidebar__menu" onclick="loadContent('cancel.jsp');">
+            <div class="sidebar__menu" onclick="loadContent('enrollDrop.jsp');">
                 <img src="${pageContext.request.contextPath}/resources/assets/cancel.svg"
                      data-original-src="${pageContext.request.contextPath}/resources/assets/cancel.svg"
                      data-selected-src="${pageContext.request.contextPath}/resources/assets/cancel-white.svg"
-                     alt="수강취소" />
-                <div>수강취소</div>
+                     alt="수강포기" />
+                <div>수강포기</div>
             </div>
             <div class="sidebar__menu" onclick="loadContent('reset_password.jsp');">
                 <img src="${pageContext.request.contextPath}/resources/assets/key.svg"
