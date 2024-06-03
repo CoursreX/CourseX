@@ -2,6 +2,15 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import="conn.Conn" %>
 
+<%
+    Object user = session.getAttribute("user");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <div class="content__left">
     <div class="content__left__container">
         <table class="table">

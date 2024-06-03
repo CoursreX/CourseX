@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+    Object user = session.getAttribute("user");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <div class="menu">
     <div class="menu__item1">
         <h1>CourseX에 오신 것을 환영합니다!</h1>
