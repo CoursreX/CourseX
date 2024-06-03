@@ -3,13 +3,12 @@
 <html>
 <head>
     <title>CourseX - 수강신청</title>
-    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="./resources/css/index.css" />
     <link rel="stylesheet" href="./resources/css/sidebar.css" />
+    <link rel="stylesheet" href="./resources/css/userInfo.css" />
+    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="./resources/css/search.css" />
     <link rel="stylesheet" href="./resources/css/enroll.css"/>
-    <link rel="stylesheet" href="./resources/css/userInfo.css" />
-    <link rel="stylesheet" href="./resources/css/cancel.css" />
     <link rel="stylesheet" href="./resources/css/login.css" />
 </head>
 <body>
@@ -24,7 +23,8 @@
 <script src="resources/js/loadContent.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="resources/js/searchForm.js"></script>
-<script src="resources/js/getEnrollInfo.js" ></script>
 <script src="resources/js/cancelEnroll.js" ></script>
+<script src="resources/js/getEnrollInfoAll.js" ></script>
+<script src="resources/js/dropEnroll.js" ></script>
 </body>
 </html>
