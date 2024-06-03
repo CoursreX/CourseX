@@ -4,9 +4,10 @@
     String userName = (String) session.getAttribute("userName");
     String userId = (String) session.getAttribute("user");
     String major = (String) session.getAttribute("major");
-    String semester = (String) session.getAttribute("semester");
-    String creditLimit = (String) session.getAttribute("creditLimit");
+    Integer semester = (Integer) session.getAttribute("semester");
+    Integer creditLimit = (Integer) session.getAttribute("creditLimit");
 %>
+
 <aside id="user-info">
     <div class="user-info__item">
         <span class="user-info__label">이름</span>

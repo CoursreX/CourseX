@@ -24,7 +24,7 @@
                 <th class="table__cell">강의실</th>
                 <th class="table__cell">강의시간</th>
                 <th class="table__cell">정원</th>
-                <th class="table__cell">취소일자</th>
+                <th class="table__cell">포기일자</th>
                 <th class="table__cell">포기신청</th>
             </tr>
             </thead>

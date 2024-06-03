@@ -35,16 +35,21 @@ public class Conn {
         return rs;
     }
 
-    public void cancelEnroll(String enrollId) {
-        String sql = "DELETE FROM ENROLL WHERE ENROLL_ID = ?";
+    public int cancelEnroll(String studentId, String enrollId) {
+        int updatedCreditLimit = -1;
+        String sql = "{? = call CANCEL_ENROLL(?, ?)}";
 
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
-            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            CallableStatement cstmt = myConn.prepareCall(sql);
 
-            pstmt.setString(1, enrollId);
-            pstmt.executeQuery();
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.setString(2, studentId);
+            cstmt.setString(3, enrollId);
+
+            cstmt.execute();
+            updatedCreditLimit = cstmt.getInt(1);
         } catch (ClassNotFoundException e) {
             System.out.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
@@ -52,6 +57,7 @@ public class Conn {
             System.out.println("오라클 연결 실패");
             e.printStackTrace();
         }
+        return updatedCreditLimit;
     }
 
     public ResultSet getEnrollInfoSuccess(String studentId) {
@@ -165,5 +171,32 @@ public class Conn {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public int updateCreditLimit(String studentId, String courseId, String action) {
+        int updatedCreditLimit = -1;
+        String sql = "{? = call UPDATE_CREDIT_LIMIT(?, ?, ?)}";
+
+        try {
+            Class.forName(driver);
+            Connection myConn = DriverManager.getConnection(url, user, password);
+            CallableStatement cstmt = myConn.prepareCall(sql);
+
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.setString(2, studentId);
+            cstmt.setString(3, courseId);
+            cstmt.setString(4, action);
+            cstmt.execute();
+
+            updatedCreditLimit = cstmt.getInt(1);
+        } catch (ClassNotFoundException e) {
+            System.out.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("오라클 연결 실패");
+            e.printStackTrace();
+        }
+
+        return updatedCreditLimit;
     }
 }

@@ -22,7 +22,6 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 alert('수강취소에 실패했습니다.');
-                console.log(error);
             }
         });
     });

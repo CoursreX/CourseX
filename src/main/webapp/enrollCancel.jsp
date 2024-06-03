@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="conn.Conn" %>
 
 <%
