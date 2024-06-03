@@ -35,7 +35,7 @@ public class Conn {
         return rs; // 항상 ResultSet을 반환합니다.
     }
 
-    public void cancelEnroll(String enroll_id) {
+    public void dropEnroll(String enroll_id) {
         String sql = "UPDATE ENROLL " +
                 "SET ENROLL_CANCEL = SYSDATE, " +
                 "ENROLL_STAT = 2" +
@@ -57,7 +57,7 @@ public class Conn {
         }
     }
 
-    public ResultSet getCancelEnrollInfo(String studentId) {
+    public ResultSet getEnrollDropInfo(String studentId) {
         ResultSet rs = null;
         String sql = "SELECT " +
                 "E.ENROLL_ID AS ENROLL_ID, " +

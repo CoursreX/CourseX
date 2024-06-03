@@ -8,11 +8,11 @@
     Conn conn = new Conn();
     ResultSet rs = null;
 
-    conn.cancelEnroll(enrollIdParam);
+    conn.dropEnroll(enrollIdParam);
 
     try {
         String studentId = (String) session.getAttribute("user");
-        rs = conn.getCancelEnrollInfo(studentId);
+        rs = conn.getEnrollDropInfo(studentId);
         while (rs.next()) {
 %>
 <tr>

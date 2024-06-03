@@ -26,7 +26,7 @@
                     String studentId = (String) session.getAttribute("user");
 
                     try {
-                        rs = conn.getCancelEnrollInfo(studentId);
+                        rs = conn.getEnrollDropInfo(studentId);
                         while (rs.next()) {
                 %>
                 <tr>
