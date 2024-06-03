@@ -8,11 +8,11 @@
     Conn conn = new Conn();
     ResultSet rs = null;
 
-    conn.dropEnroll(enrollIdParam);
+    conn.cancelEnroll(enrollIdParam);
 
     try {
         String studentId = (String) session.getAttribute("user");
-        rs = conn.getEnrollDropInfo(studentId);
+        rs = conn.getEnrollInfoSuccess(studentId);
         while (rs.next()) {
 %>
 <tr>
@@ -24,28 +24,17 @@
     <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
     <td class="table__cell"><%= rs.getString("COURSE_TIME") %></td>
     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
-    <td class="table__cell"><%= rs.getString("CANCEL_DATE") %></td>
     <td class="table__cell">
-        <%
-            if(rs.getInt("ENROLL_STAT") == 2) {
-        %>
-        포기완료
-        <%
-            } else {
-        %>
-        <button class="default__button drop__enroll__button"
-                data-enroll-id="<%= rs.getString("ENROLL_ID")%>"
+        <button class="default__button cancel__enroll__button"
+                data-enrollid="<%= rs.getString("ENROLL_ID")%>"
                 data-course-name="<%= rs.getString("COURSE_NAME")%>"
                 data-course-no="<%= rs.getInt("COURSE_NO")%>">
-            포기
+            취소
         </button>
-        <%
-            }
-        }
-        %>
     </td>
 </tr>
 <%
+        }
     } catch (SQLException e) {
         e.printStackTrace();
     } finally {

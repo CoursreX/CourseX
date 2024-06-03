@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $(document).on('click', '.cancel__enroll__button', function(event) {
+    $(document).on('click', '.drop__enroll__button', function(event) {
         const enrollId = event.target.dataset.enrollId;
         const courseName = event.target.dataset.courseName;
         const courseNo = event.target.dataset.courseNo;
-        const decision = confirm(`과목명: ${courseName}\n분반: ${courseNo}\n해당 과목의 수강을 취소하겠습니까?`);
+        const decision = confirm(`과목명: ${courseName}\n분반: ${courseNo}\n해당 과목의 수강을 포기하겠습니까?`);
         if(!decision) return;
 
         $.ajax({

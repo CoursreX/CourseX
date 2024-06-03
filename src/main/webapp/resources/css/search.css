@@ -47,13 +47,6 @@
     filter: brightness(1.2);
 }
 
-/* result */
-.search__result {
-    padding: 40px;
-    border-radius: 25px;
-    background-color: var(--grey-scale-10);
-}
-
 .enroll__success {
     font: var(--text-exsm-emphasis);
     color: blue;

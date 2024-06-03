@@ -26,7 +26,7 @@
         </div>
         <button class="search__button">검색</button>
     </form>
-    <div class="search__result">
+    <div class="content__left__container">
         <table class="table">
             <thead class="table__header">
             <tr>
@@ -55,8 +55,15 @@
 
                     try {
                         rs = conn.getEnrollInfoAll(studentId, currentYear, currentSemester);
-                        while (rs.next()) {
+                        if (!rs.next()) {
                 %>
+                <tr>
+                    <td class="table__cell" colspan="9">조회 결과가 없습니다.</td>
+                </tr>
+                <%
+                        } else {
+                            do {
+               %>
                 <tr>
                     <td class="table__cell"><%= rs.getString("COURSE_ID") %></td>
                     <td class="table__cell"><%= rs.getString("COURSE_NAME") %></td>
@@ -78,6 +85,7 @@
                     <td class="table__cell <%= colorClass %>"><%= rs.getString("ENROLL_STAT") %></td>
                 </tr>
                 <%
+                            } while(rs.next());
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
