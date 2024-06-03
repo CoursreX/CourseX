@@ -139,10 +139,7 @@ public class Conn {
                 "C.COURSE_ROOM AS COURSE_ROOM, " +
                 "C.COURSE_DAY || ' ' || C.COURSE_TIME AS COURSE_TIME, " +
                 "C.COURSE_CAP AS COURSE_CAP, " +
-                "CASE " +
-                "WHEN E.ENROLL_CANCEL IS NULL THEN '없음' " +
-                "ELSE TO_CHAR(E.ENROLL_CANCEL, 'YYYY.MM.DD') " +
-                "END AS CANCEL_DATE " +
+                "NVL(TO_CHAR(E.ENROLL_CANCEL, 'YYYY.MM.DD'), '없음') AS CANCEL_DATE " +
                 "FROM " +
                 "ENROLL E " +
                 "JOIN " +
