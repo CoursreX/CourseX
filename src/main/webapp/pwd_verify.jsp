@@ -177,8 +177,8 @@
     if (!userEmail.isEmpty() && (session.getAttribute("emailSent") == null || !(Boolean) session.getAttribute("emailSent"))) {
         String host = "smtp.naver.com";
         String port = "465";
-        String from = "0buta@naver.com"; // 본인의 네이버 이메일 주소
-        String pass = "U53R6XZL7UVT"; // 네이버 앱 비밀번호
+        String from = ""; // 본인의 네이버 이메일 주소
+        String pass = ""; // 네이버 앱 비밀번호
 
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
