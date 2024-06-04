@@ -19,7 +19,7 @@
         System.out.println("DB연결 완료!");
 
         // 관리자인지 확인
-        String adminSQL = "SELECT admin_id FROM Admin WHERE admin_id = ? AND admin_pw = ?";
+        String adminSQL = "SELECT admin_id, admin_name, admin_dept FROM Admin WHERE admin_id = ? AND admin_pw = ?";
         pstmt = myConn.prepareStatement(adminSQL);
         pstmt.setString(1, userID);
         pstmt.setString(2, userPassword);
@@ -27,26 +27,52 @@
 
         if (rs.next()) {
             // 관리자인 경우
-            session.setAttribute("user", userID);
-            System.out.println("로그인 성공: 관리자 세션 저장됨. 관리자 ID: " + userID);
-            response.sendRedirect("admin_index.jsp");
+            String adminName = rs.getString("admin_name");
+            String adminDept = rs.getString("admin_dept");
+
+            session.setAttribute("admin", userID);
+            session.setAttribute("adminName", adminName);
+            session.setAttribute("adminDept", adminDept);
+%>
+<script>
+            alert('로그인 성공: 관리자 세션 저장됨. 관리자 ID: <%=userID%>');
+            window.location.href = ("admin_index.jsp");
+</script>
+<%
         } else {
             // 학생인지 확인
-            String studentSQL = "SELECT student_id FROM STUDENT WHERE student_id = ? AND student_pw = ?";
+            String studentSQL = "SELECT student_id, STUDENT_NAME, MAJOR_ID, STUDENT_SEM, CREDIT_LIMIT  FROM STUDENT WHERE student_id = ? AND student_pw = ?";
             pstmt = myConn.prepareStatement(studentSQL);
             pstmt.setString(1, userID);
             pstmt.setString(2, userPassword);
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                // 학생인 경우
+                String studentName = rs.getString("STUDENT_NAME");
+                String studentMajor = rs.getString("MAJOR_ID");
+                int studentSem = rs.getInt("STUDENT_SEM");
+                int creditLimit = rs.getInt("CREDIT_LIMIT");
+
+                session.setAttribute("userName", studentName);
+                session.setAttribute("major", studentMajor);
+                session.setAttribute("semester", studentSem);
+                session.setAttribute("creditLimit", creditLimit);
                 session.setAttribute("user", userID);
-                System.out.println("로그인 성공: 학생 세션 저장됨. 학생 ID: " + userID);
-                response.sendRedirect("index.jsp");
+%>
+
+<script>
+    alert('로그인 성공: 학생 세션 저장됨. 학생 ID: <%=userID%>');
+    window.location.href = ("index.jsp");
+</script>
+<%
             } else {
                 // 잘못된 사용자 ID 또는 비밀번호
-                System.out.println("로그인 실패: 잘못된 사용자 ID 또는 비밀번호.");
-                response.sendRedirect("login.jsp");
+%>
+<script>
+    alert('로그인 실패: 잘못된 사용자 ID 또는 비밀번호.');
+    window.location.href = ("login.jsp");
+</script>
+<%
             }
         }
     } catch (Exception e) {

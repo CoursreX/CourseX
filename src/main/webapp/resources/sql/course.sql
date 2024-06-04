@@ -1,5 +1,3 @@
--- 개설여부에 CHECK 조건 사용해서 0과 1 둘 중 하나만 넣을 수 있게 하기
-
 CREATE TABLE COURSE (
     COURSE_ID VARCHAR2(20),
     COURSE_NO NUMBER(1),

@@ -12,11 +12,12 @@
     try {
         int updatedCreditLimit = conn.cancelEnroll(studentId, enrollIdParam);
         System.out.println(updatedCreditLimit);
+      
         if(updatedCreditLimit > -1) {
             session.setAttribute("creditLimit", updatedCreditLimit);
         }
+      
         rs = conn.getEnrollInfoSuccess(studentId);
-
         while (rs.next()) {
 %>
 <tr>

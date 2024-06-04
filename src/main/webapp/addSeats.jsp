@@ -1,16 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="conn.Conn" %>
+<%@ page import="java.util.*" %>
+<%
+    String searchOption = request.getParameter("searchOption");
+    String search = request.getParameter("search");
+
+    List<Map<String, Object>> courseResult = new ArrayList<>();
+    if (searchOption != null && search != null && !search.trim().isEmpty()) {
+        Conn conn = new Conn();
+        courseResult = conn.add_searchCourse(searchOption, search);
+    }
+%>
 
 <div class="content__left">
-    <form class="add_search__filter">
+    <form id="addSeats_search_form" class="add_search__filter">
     	<div class="add_search__filter__element">
-    		<input type="radio" id="searchById" name="searchOption" checked>
+    		<input type="radio" id="searchById" name="searchOption" value="id" checked>
     		<label for="searchById">과목코드 검색</label>
-    		<input type="radio" id="searchByName" name ="searchOption">
+    		<input type="radio" id="searchByName" name ="searchOption" value="name">
     		<label for="searchByName">과목명 검색</label>
     	</div>
-    	<div class="input-container">
-    		<input class="add_input" type="text" placeholder="내용을 입력해주세요.">        
-        	<button class="add_search__button">검색</button>
+    	<div class="add_input-container">
+    		<input class="add_input" type="text" name="add_search" placeholder="내용을 입력해주세요.">
+        	<button class="add_search__button" type="submit">검색</button>
         </div>
     </form>
     <div class="add__list">
@@ -29,31 +41,8 @@
                 <th class="table__cell">증원</th>
             </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">0</td>
-                    <td class="table__cell"><button class="add__button" onclick="addSeatsAlert('1234657')">증원하기</button></td>
-                </tr>
-                <tr>
-                    <td class="table__cell">1234567</td>
-                    <td class="table__cell">파이썬으로배우는데이터시각화</td>
-                    <td class="table__cell">1</td>
-                    <td class="table__cell">3</td>
-                    <td class="table__cell">박숙영</td>
-                    <td class="table__cell">명신520</td>
-                    <td class="table__cell">화, 목 9:00-10:15</td>
-                    <td class="table__cell">000</td>
-                    <td class="table__cell">0</td>
-                    <td class="table__cell"><button class="add__button" onclick="addSeatsAlert('1234657')">증원하기</button></td>
-                </tr>
+            <tbody class="add_table__body">
+            <!-- 검색 결과 표시-->
             </tbody>
         </table>
     </div>

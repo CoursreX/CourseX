@@ -35,7 +35,7 @@
                      alt="수강포기" />
                 <div>수강포기</div>
             </div>
-            <div class="sidebar__menu" onclick="loadContent('reset_password.jsp');">
+            <div class="sidebar__menu" onclick="loadContent('reset_pwd.jsp');">
                 <img src="${pageContext.request.contextPath}/resources/assets/key.svg"
                      data-original-src="${pageContext.request.contextPath}/resources/assets/key.svg"
                      data-selected-src="${pageContext.request.contextPath}/resources/assets/key-white.svg"
