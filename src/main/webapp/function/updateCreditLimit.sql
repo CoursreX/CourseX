@@ -1,7 +1,7 @@
 create FUNCTION UPDATE_CREDIT_LIMIT (
     v_student_id IN STUDENT.STUDENT_ID%TYPE,
     v_course_id IN COURSE.COURSE_ID%TYPE,
-    v_action IN VARCHAR2 -- 'ENROLL', 'CANCEL', 'DROP'
+    v_action IN VARCHAR2 -- 'ENROLL', 'CANCEL'
 ) RETURN NUMBER IS
     v_credit NUMBER;
     v_credit_limit NUMBER;
