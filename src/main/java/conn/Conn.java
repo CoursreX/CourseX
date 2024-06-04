@@ -1,6 +1,7 @@
 package conn;
 
 import java.sql.*;
+import java.util.*;
 
 public class Conn {
     String driver = "oracle.jdbc.driver.OracleDriver";
@@ -165,5 +166,87 @@ public class Conn {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    //createCourse_post.jsp
+    private Connection conn;
+    public Conn() {
+        try {
+            // JDBC 드라이버 로드
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName(driver);
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    public void close() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }
+    }
+
+    //addSeats.jsp 검색 기능
+    public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {
+        List<Map<String, Object>> courseResult = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection(); // conn 초기화
+            String sql = "";
+            System.out.println("db연결 완료.");
+
+
+            if ("id".equals(searchOption)) { //searchById
+                sql = "SELECT c.*, (c.COURSE_CAP - c.COURSE_ENROLLED) AS course_seats, f.FACULTY_NAME " +
+                        "FROM COURSE c JOIN FACULTY f ON c.FACULTY_ID = f.FACULTY_ID " +
+                        "WHERE c.COURSE_ID = ?";
+            } else if ("name".equals(searchOption)) { //searchByName
+                sql = "SELECT c.*, (c.COURSE_CAP - c.COURSE_ENROLLED) AS course_seats, f.FACULTY_NAME " +
+                        "FROM COURSE c JOIN FACULTY f ON c.FACULTY_ID = f.FACULTY_ID " +
+                        "WHERE c.COURSE_NAME LIKE ?"; // LIKE으로 해야 "검색어"랑 똑같지 않아도 포함되면 출력됨
+            }
+            pstmt = conn.prepareStatement(sql);
+
+            if ("id".equals(searchOption)) { // searchById
+                pstmt.setString(1, search);
+            } else if ("name".equals(searchOption)) { // searchByName
+                pstmt.setString(1, "%" + search + "%"); //그 글자 들은거 다 찾기
+            }
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) { // DB에서 검색어에 맞는 정보 묶기
+                Map<String, Object> courseSearch = new HashMap<>();
+                courseSearch.put("course_id", rs.getString("course_id"));
+                courseSearch.put("course_name", rs.getString("course_name"));
+                courseSearch.put("course_no", rs.getInt("course_no"));
+                courseSearch.put("course_credit", rs.getInt("course_credit"));
+                courseSearch.put("faculty_name", rs.getString("faculty_name"));
+                courseSearch.put("course_room", rs.getString("course_room"));
+                courseSearch.put("course_time", rs.getString("course_time"));
+                courseSearch.put("course_cap", rs.getInt("course_cap"));
+                courseSearch.put("course_enrolled", rs.getInt("course_enrolled"));
+                courseSearch.put("course_seats", rs.getInt("course_seats"));
+                courseResult.add(courseSearch);
+            }
+        } catch(Exception e){
+                e.printStackTrace();
+        } finally{
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return courseResult;
     }
 }
