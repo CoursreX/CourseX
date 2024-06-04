@@ -22,6 +22,8 @@
       <input type="password" name="userPassword" placeholder="PassWord">
       <input type="submit" name="Submit" value="Login">
     </form>
+    <div class="forget-password-button" onclick="location.href='forget_pwd.jsp';">Forget Password?</div>
+  </div>
   </div>
 </div>
 </body>

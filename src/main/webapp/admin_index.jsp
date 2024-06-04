@@ -4,9 +4,9 @@
 <html>
 <head>
     <title>CourseX - 수강신청</title>
-    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="./resources/css/index.css" />
     <link rel="stylesheet" href="./resources/css/sidebar.css" />
+    <link rel="stylesheet" href="resources/css/main.css"/>
     <link rel="stylesheet" href="./resources/css/userInfo.css" />
     <link rel="stylesheet" href="./resources/css/addSeats.css" />
     <link rel="stylesheet" href="resources/css/createCourse.css"/>
