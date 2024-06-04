@@ -2,7 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/conn/Conn.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/PLSQL/checkTime.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/sql/course.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/sql/student.sql" dialect="Oracle" />
   </component>

@@ -21,7 +21,7 @@
                      alt="수강취소" />
                 <div>수강취소</div>
             </div>
-            <div class="sidebar__menu" onclick="loadContent('search.jsp');">
+            <div class="sidebar__menu" onclick="loadContent('enrollSearch.jsp');">
                 <img src="${pageContext.request.contextPath}/resources/assets/word.svg"
                      data-original-src="${pageContext.request.contextPath}/resources/assets/word.svg"
                      data-selected-src="${pageContext.request.contextPath}/resources/assets/word-white.svg"

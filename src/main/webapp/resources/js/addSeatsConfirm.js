@@ -20,7 +20,7 @@ function addSeatsConfirm(course_id, course_no, faculty_name) {
         if (confirm("증원인원을 확인해주세요.\n\n" + increaseAmount + "명 증원합니다.")) {
             if (increaseAmount >= 1) {
                 $.ajax({
-                    url: 'http://localhost:8080/ajax/addSeatsProcess.jsp',
+                    url: 'http://localhost:8080/CourseX_war_exploded/ajax/addSeatsProcess.jsp',
                     type: 'POST',
                     data: {
                         courseId: course_id,
