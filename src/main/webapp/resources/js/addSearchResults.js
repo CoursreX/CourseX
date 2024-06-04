@@ -5,7 +5,7 @@ $(document).ready(function() {
         const search = $('input[name="add_search"]').val().toUpperCase();
 
         $.ajax({
-            url: 'http://localhost:8080/ajax/addSearchResults.jsp',
+            url: 'http://localhost:8080/CourseX_war_exploded/ajax/addSearchResults.jsp',
             type: 'GET',
             data: {
                 searchOption: searchOption,
