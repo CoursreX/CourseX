@@ -5,7 +5,7 @@
     String userId = (String) session.getAttribute("user");
     String major = (String) session.getAttribute("major");
     Integer semester = (Integer) session.getAttribute("semester");
-    Integer creditLimit = (Integer) session.getAttribute("creditLimit");
+    String creditLimit = request.getParameter("creditLimit");
 %>
 
 <aside id="user-info">

@@ -396,5 +396,7 @@
     }
 %>
 <div id="content__right">
-    <%@ include file="/views/userInfo.jsp" %>
+    <jsp:include page="/views/userInfo.jsp">
+        <jsp:param name="creditLimit" value='<%= String.valueOf(session.getAttribute("creditLimit")) %>' />
+    </jsp:include>
 </div>
