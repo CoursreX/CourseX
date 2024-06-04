@@ -14,7 +14,7 @@
     ResultSet rs = null;
 
     try {
-        rs = conn.getEnrollInfo(studentId, year, semester);
+        rs = conn.getEnrollInfoAll(studentId, year, semester);
         while (rs.next()) {
 %>
 <tr>
