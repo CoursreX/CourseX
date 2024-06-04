@@ -2,8 +2,17 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import="conn.Conn" %>
 
+<%
+    Object user = session.getAttribute("user");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <div class="content__left">
-    <div class="cancel__list">
+    <div class="content__left__container">
         <table class="table">
             <thead class="table__header">
             <tr>
@@ -16,7 +25,7 @@
                 <th class="table__cell">강의시간</th>
                 <th class="table__cell">정원</th>
                 <th class="table__cell">취소일자</th>
-                <th class="table__cell">취소신청</th>
+                <th class="table__cell">포기신청</th>
             </tr>
             </thead>
             <tbody class="table__body">
@@ -26,8 +35,15 @@
                     String studentId = (String) session.getAttribute("user");
 
                     try {
-                        rs = conn.getCancelEnrollInfo(studentId);
-                        while (rs.next()) {
+                        rs = conn.getEnrollDropInfo(studentId);
+                        if(!rs.next()) {
+                %>
+                <tr>
+                    <td class="table__cell" colspan="10">수강신청된 과목이 없습니다.</td>
+                </tr>
+                <%
+                        } else {
+                            do {
                 %>
                 <tr>
                     <td class="table__cell"><%= rs.getString("COURSE_ID") %></td>
@@ -41,20 +57,21 @@
                     <td class="table__cell"><%= rs.getString("CANCEL_DATE") %></td>
                     <td class="table__cell">
                     <%
-                            if(rs.getInt("ENROLL_STAT") == 2) {
+                                if(rs.getInt("ENROLL_STAT") == 2) {
                     %>
-                        취소완료
+                        포기완료
                     <%
-                            } else {
+                                } else {
                     %>
-                        <button class="cancel__enroll__button"
+                        <button class="default__button drop__enroll__button"
                                 data-enroll-id="<%= rs.getString("ENROLL_ID")%>"
                                 data-course-name="<%= rs.getString("COURSE_NAME")%>"
                                 data-course-no="<%= rs.getInt("COURSE_NO")%>">
-                            취소
+                            포기
                         </button>
                     <%
-                            }
+                                }
+                            } while(rs.next());
                         }
                     %>
                     </td>
