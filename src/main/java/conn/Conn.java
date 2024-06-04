@@ -169,4 +169,34 @@ public class Conn {
         }
         return rs;
     }
+
+    public boolean checkEnrollDropPeriod() {
+        String sql = "{? = call CHECK_ENROLL_DROP_PERIOD()}";
+        boolean isPeriod = false;
+
+        try {
+            Class.forName(driver);
+            Connection myConn = DriverManager.getConnection(url, user, password);
+            CallableStatement cstmt = myConn.prepareCall(sql);
+
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.execute();
+            int result = cstmt.getInt(1);
+
+            if (result == 1) {
+                isPeriod = true;
+            } else {
+                isPeriod = false;
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("checkEnrollDropPeriod - 수강포기 기간 검사 오류");
+            e.printStackTrace();
+        }
+
+        return isPeriod;
+    }
 }
