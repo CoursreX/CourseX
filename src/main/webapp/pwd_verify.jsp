@@ -177,8 +177,8 @@
     if (!userEmail.isEmpty() && (session.getAttribute("emailSent") == null || !(Boolean) session.getAttribute("emailSent"))) {
         String host = "smtp.naver.com";
         String port = "465";
-        String from = ""; // 본인의 네이버 이메일 주소
-        String pass = ""; // 네이버 앱 비밀번호
+        String from = "네이버 이메일"; // 본인의 네이버 이메일 주소
+        String pass = "네이버 비밀번호"; // 네이버 앱 비밀번호
 
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
@@ -186,6 +186,8 @@
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.ssl.trust", host);
+
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -197,11 +199,12 @@
             MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
-            message.setSubject("Password Reset Verification");
+            message.setSubject("[COURSEX] Password Reset Verification");
             message.setText("Your verification code is: " + resetToken);
 
             Transport.send(message);
             session.setAttribute("emailSent", true); // 이메일이 전송되었음을 세션에 저장
+            System.out.println("메일 전송 완료");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -226,7 +229,6 @@
     <p class="forgot-password">Forgot Password</p>
     <% if (!userEmail.isEmpty()) { %>
     <h2 class="forgot-msg"><%= userEmail %>로 인증번호를 보냈습니다</h2>
-    <h2 class="forgot-msg"><%= resetToken %>로 인증번호를 보냈습니다</h2>
     <% } %>
 
     <form method="post" action="pwd_verify.jsp">
