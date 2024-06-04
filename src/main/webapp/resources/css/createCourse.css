@@ -1,0 +1,223 @@
+.uploadCourse_form {
+    padding: 30px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-10);
+}
+.form_container {
+    padding: 30px 0px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-15);
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadCourse_form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row1,
+.row2,
+.row3,
+.row4 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin: 10px;
+}
+
+.input-container,
+.input-container3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--grey-scale-0);
+    border-radius: 10px;
+    padding:10px;
+}
+
+.display_name,
+.display_name2,
+.display_name3 {
+    min-width: 65px;
+    display: flex;
+    justify-content: center;
+    font: var(--title-md);
+    color: var(--primary-navi);
+}
+
+.input-container input[type="text"],
+.input-container input[type="number"],
+.input-container3 input[type="text"],
+.input-container3 input[type="number"],
+.input-container3_right [type="text"],
+.input-container3_right [type="number"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80px;
+    font: var(--text-md);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+.input-container2,
+.input-container3_right,
+.input-container4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--grey-scale-0);
+    border-radius: 10px;
+    padding:10px;
+    width: 376px;
+}
+
+.input-container2 input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    font: var(--text-md);
+}
+
+.select_category {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.select_category select {
+    width: 90px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background:url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
+    background-color: var(--grey-scale-15);
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+    font: var(--text-md);
+    margin-left: 5px;
+}
+
+.display_name4 {
+    min-width: 160px;
+    display: flex;
+    font: var(--title-md);
+    color: var(--primary-navi);
+    justify-content: space-around;
+}
+
+.input-container4 input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50px;
+    font: var(--text-md);
+}
+.input-container4 p {
+    font: var(--title-lg);
+    padding: 10px;
+}
+
+.select_building {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.select_building select {
+    width: 155px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background:url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
+    background-color: var(--grey-scale-15);
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+    font: var(--text-md);
+    margin-right: 20px;
+}
+
+.select_hour,
+.select_min {
+    display: flex;
+    align-items: center;
+}
+
+.select_hour select,
+.select_min select {
+    width: 75px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background:url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
+    background-color: var(--grey-scale-15);
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+    font: var(--text-md);
+}
+
+/*날짜 선택용 버튼*/
+.day_button_container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+}
+
+.day-button {
+    padding: 10px;
+    border: 1px solid var(--grey-scale-15);
+    border-radius: 4px;
+    background-color: var(--grey-scale-0);
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.day-button.selected {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+
+/*전에 썼던거*/
+.upload {
+	display: flex;
+    justify-content: center;
+}
+.create__button {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: var(--primary-blue);
+    border: none;
+    outline: none;
+    font: var(--text-md);
+    color: var(--grey-scale-transparent-2);
+    cursor: pointer;
+}
+
+.create__button:active {
+    filter: brightness(1.2);
+}
