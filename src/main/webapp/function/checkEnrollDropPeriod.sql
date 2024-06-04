@@ -1,0 +1,18 @@
+create OR REPLACE FUNCTION CHECK_ENROLL_DROP_PERIOD
+RETURN NUMBER
+IS
+    v_period_start DATE;
+    v_period_end DATE;
+BEGIN
+    SELECT PERIOD_START, PERIOD_END
+    INTO v_period_start, v_period_end
+    FROM ENROLL_DROP_PERIOD
+    WHERE PERIOD_YEAR = DATE_TO_ENROLL_YEAR() AND PERIOD_SEM = DATE_TO_ENROLL_SEMESTER();
+
+    IF SYSDATE BETWEEN v_period_start AND v_period_end THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+END;
+/

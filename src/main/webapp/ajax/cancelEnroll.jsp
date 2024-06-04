@@ -3,15 +3,20 @@
 <%@ page import="conn.Conn" %>
 
 <%
+    String studentId = (String) session.getAttribute("user");
     String enrollIdParam = request.getParameter("enrollId");
 
     Conn conn = new Conn();
     ResultSet rs = null;
 
-    conn.cancelEnroll(enrollIdParam);
-
     try {
-        String studentId = (String) session.getAttribute("user");
+        int updatedCreditLimit = conn.cancelEnroll(studentId, enrollIdParam);
+        System.out.println(updatedCreditLimit);
+      
+        if(updatedCreditLimit > -1) {
+            session.setAttribute("creditLimit", updatedCreditLimit);
+        }
+      
         rs = conn.getEnrollInfoSuccess(studentId);
         while (rs.next()) {
 %>

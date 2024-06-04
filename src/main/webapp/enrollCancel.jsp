@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="conn.Conn" %>
 
 <%
@@ -7,10 +7,16 @@
 
     if (user == null) {
         response.sendRedirect("login.jsp");
-        return;
     }
-%>
 
+    Conn conn = new Conn();
+
+    if(!conn.checkEnrollPeriod()) {
+%>
+<div class="content__left">수강신청 기간이 아닙니다.</div>
+<%
+    } else {
+%>
 <div class="content__left">
     <div class="content__left__container">
         <table class="table">
@@ -78,6 +84,9 @@
         </table>
     </div>
 </div>
+<%
+    }
+%>
 <div class="content__right">
     <%@ include file="/views/userInfo.jsp" %>
 </div>

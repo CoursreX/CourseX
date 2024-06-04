@@ -44,7 +44,6 @@
             <tbody class="add_table__body">
             <!-- 검색 결과 표시-->
             </tbody>
-
         </table>
     </div>
 </div>

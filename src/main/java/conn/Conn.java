@@ -27,32 +27,38 @@ public class Conn {
 
             rs = (ResultSet) cstmt.getObject(4);
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollInfoAll - 수강정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
     }
 
-    public void cancelEnroll(String enrollId) {
-        String sql = "DELETE FROM ENROLL WHERE ENROLL_ID = ?";
+    public int cancelEnroll(String studentId, String enrollId) {
+        int updatedCreditLimit = -1;
+        String sql = "{? = call CANCEL_ENROLL(?, ?)}";
 
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
-            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            CallableStatement cstmt = myConn.prepareCall(sql);
 
-            pstmt.setString(1, enrollId);
-            pstmt.executeQuery();
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.setString(2, studentId);
+            cstmt.setString(3, enrollId);
+
+            cstmt.execute();
+            updatedCreditLimit = cstmt.getInt(1);
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("cancelEnroll - 수강취소 실패");
             e.printStackTrace();
         }
+        return updatedCreditLimit;
     }
 
     public ResultSet getEnrollInfoSuccess(String studentId) {
@@ -90,10 +96,10 @@ public class Conn {
             pstmt.setString(1, studentId);
             rs = pstmt.executeQuery();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollInfoSuccess - 수강신청 성공 정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
@@ -113,10 +119,10 @@ public class Conn {
             pstmt.setString(1, enrollId);
             pstmt.executeUpdate();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("dropEnroll - 수강포기 실패");
             e.printStackTrace();
         }
     }
@@ -134,10 +140,7 @@ public class Conn {
                 "C.COURSE_ROOM AS COURSE_ROOM, " +
                 "C.COURSE_DAY || ' ' || C.COURSE_TIME AS COURSE_TIME, " +
                 "C.COURSE_CAP AS COURSE_CAP, " +
-                "CASE " +
-                "WHEN E.ENROLL_CANCEL IS NULL THEN '없음' " +
-                "ELSE TO_CHAR(E.ENROLL_CANCEL, 'YYYY.MM.DD') " +
-                "END AS CANCEL_DATE " +
+                "NVL(TO_CHAR(E.ENROLL_CANCEL, 'YYYY.MM.DD'), '없음') AS CANCEL_DATE " +
                 "FROM " +
                 "ENROLL E " +
                 "JOIN " +
@@ -159,15 +162,75 @@ public class Conn {
             pstmt.setString(1, studentId);
             rs = pstmt.executeQuery();
         } catch (ClassNotFoundException e) {
-            System.out.println("JDBC 드라이버 로딩 실패");
+            System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println("오라클 연결 실패");
+            System.err.println("getEnrollDropInfo - 수강포기 정보 가져오기 실패");
             e.printStackTrace();
         }
         return rs;
     }
 
+    public boolean checkEnrollDropPeriod() {
+        String sql = "{? = call CHECK_ENROLL_DROP_PERIOD()}";
+        boolean isPeriod = false;
+
+        try {
+            Class.forName(driver);
+            Connection myConn = DriverManager.getConnection(url, user, password);
+            CallableStatement cstmt = myConn.prepareCall(sql);
+
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.execute();
+            int result = cstmt.getInt(1);
+
+            if (result == 1) {
+                isPeriod = true;
+            } else {
+                isPeriod = false;
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("checkEnrollDropPeriod - 수강포기 기간 검사 오류");
+            e.printStackTrace();
+        }
+
+        return isPeriod;
+    }
+
+    public boolean checkEnrollPeriod() {
+        String sql = "{? = call CHECK_ENROLL_PERIOD()}";
+        boolean isPeriod = false;
+
+        try {
+            Class.forName(driver);
+            Connection myConn = DriverManager.getConnection(url, user, password);
+            CallableStatement cstmt = myConn.prepareCall(sql);
+
+            cstmt.registerOutParameter(1, Types.NUMERIC);
+            cstmt.execute();
+            int result = cstmt.getInt(1);
+
+            if (result == 1) {
+                isPeriod = true;
+            } else {
+                isPeriod = false;
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("checkEnrollPeriod - 수강신청 기간 검사 오류");
+            e.printStackTrace();
+        }
+
+        return isPeriod;
+    }
+  
     //createCourse_post.jsp
     private Connection conn;
     public Conn() {
@@ -248,5 +311,4 @@ public class Conn {
             }
         }
         return courseResult;
-    }
 }

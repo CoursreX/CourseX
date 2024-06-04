@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="conn.Conn" %>
 
 <%
@@ -7,10 +7,16 @@
 
     if (user == null) {
         response.sendRedirect("login.jsp");
-        return;
     }
-%>
 
+    Conn conn = new Conn();
+
+    if(!conn.checkEnrollDropPeriod()) {
+%>
+<div class="content__left">수강포기 기간이 아닙니다.</div>
+<%
+    } else {
+%>
 <div class="content__left">
     <div class="content__left__container">
         <table class="table">
@@ -24,13 +30,12 @@
                 <th class="table__cell">강의실</th>
                 <th class="table__cell">강의시간</th>
                 <th class="table__cell">정원</th>
-                <th class="table__cell">취소일자</th>
+                <th class="table__cell">포기일자</th>
                 <th class="table__cell">포기신청</th>
             </tr>
             </thead>
             <tbody class="table__body">
                 <%
-                    Conn conn = new Conn();
                     ResultSet rs = null;
                     String studentId = (String) session.getAttribute("user");
 
@@ -91,6 +96,9 @@
         </table>
     </div>
 </div>
+<%
+    }
+%>
 <div class="content__right">
     <%@ include file="/views/userInfo.jsp" %>
 </div>
