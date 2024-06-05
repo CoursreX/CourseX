@@ -32,7 +32,5 @@
     </div>
 </div>
 <div id="content__right">
-    <jsp:include page="/views/userInfo.jsp">
-        <jsp:param name="creditLimit" value='<%= String.valueOf(session.getAttribute("creditLimit")) %>' />
-    </jsp:include>
+    <jsp:include page="/views/userInfo.jsp" />
 </div>

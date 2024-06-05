@@ -122,20 +122,18 @@ public class Conn {
         return rs;
     }
 
-    public void dropEnroll(String enrollId) {
-        String sql = "UPDATE ENROLL " +
-                "SET ENROLL_CANCEL = SYSDATE, " +
-                "ENROLL_STAT = 2" +
-                "WHERE ENROLL_ID = ?";
-
+    public void dropEnroll(String studentId, String enrollId) {
+        Connection conn = null;
+        CallableStatement cstmt = null;
+        String sql = "{CALL DROP_ENROLL(?, ?)}";
 
         try {
-            Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            conn = getConnection();
+            cstmt = conn.prepareCall(sql);
 
-            pstmt.setString(1, enrollId);
-            pstmt.executeUpdate();
+            cstmt.setString(1, studentId);
+            cstmt.setString(2, enrollId);
+            cstmt.executeUpdate();
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
