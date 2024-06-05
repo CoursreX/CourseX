@@ -19,6 +19,16 @@ $(document).ready(function() {
                 } else {
                     $('.table__body').html(response);
                 }
+
+                $.ajax({
+                    url: 'http://localhost:8080/CourseX_war_exploded/views/userInfo.jsp', // userInfo.jsp의 경로에 맞게 수정
+                    success: function(userInfoResponse) {
+                        $('.content__right').html(userInfoResponse);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('userInfo.jsp를 로드하는데 실패했습니다.');
+                    }
+                });
             },
             error: function(xhr, status, error) {
                 alert('수강취소에 실패했습니다.');

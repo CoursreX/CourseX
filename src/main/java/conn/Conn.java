@@ -9,14 +9,36 @@ public class Conn {
     String user = "coursex";
     String password = "0000";
 
+    private Connection conn;
+    public Conn() {
+        try {
+            // JDBC 드라이버 로드
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName(driver);
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    public void close() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }
+    }
+
     public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
+        Connection conn;
+        CallableStatement cstmt = null;
         ResultSet rs = null;
         String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
 
         try {
-            Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            CallableStatement cstmt = myConn.prepareCall(sql);
+            conn = getConnection();
+            cstmt = conn.prepareCall(sql);
 
             cstmt.setString(1, studentId);
             cstmt.setInt(2, year == 0 ? 2024 : year);
@@ -232,27 +254,6 @@ public class Conn {
     }
   
     //createCourse_post.jsp
-    private Connection conn;
-    public Conn() {
-        try {
-            // JDBC 드라이버 로드
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName(driver);
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    public void close() throws SQLException {
-        if (conn != null) {
-            conn.close();
-        }
-    }
-
     //addSeats.jsp 검색 기능
     public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {
         List<Map<String, Object>> courseResult = new ArrayList<>();
@@ -263,8 +264,6 @@ public class Conn {
         try {
             conn = getConnection(); // conn 초기화
             String sql = "";
-            System.out.println("db연결 완료.");
-
 
             if ("id".equals(searchOption)) { //searchById
                 sql = "SELECT c.*, (c.COURSE_CAP - c.COURSE_ENROLLED) AS course_seats, f.FACULTY_NAME " +
@@ -311,5 +310,37 @@ public class Conn {
             }
         }
         return courseResult;
+    }
+
+    public int getCreditLimit(String userId){
+        int limitCredit=0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection(); // conn 초기화
+            String sql = "select credit_limit from student where student_id=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                limitCredit = rs.getInt("credit_limit");
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return limitCredit;
     }
 }
