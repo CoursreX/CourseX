@@ -1,0 +1,91 @@
+.verify__layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.verify__container {
+    width: 900px;
+    height: 600px;
+    background-color: var(--primary-navi);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: var(--grey-scale-0);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.verify__container h2 {
+    margin-bottom: 20px;
+}
+.verify__container input[type="text"] {
+    width: 71%;
+    padding: 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font: var(--title-md);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--grey-scale-0);
+}
+.verify__container input[type="submit"] {
+    width: 45%;
+    padding: 20px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 5px;
+    background-color:rgba(255, 255, 255, 0.1);
+    color: var(--grey-scale-0);
+    font-size: 16px;
+    cursor: pointer;
+    margin-left:110px;
+}
+.verify__container input[type="submit"]:hover {
+    background-color: #ec971f;
+}
+.verify__container input[type="button"] {
+    width: 45%;
+    padding: 20px;
+    margin: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-blue);
+    color: var(--grey-scale-0);
+    font-size: 16px;
+    cursor: pointer;
+    margin-right:110px;
+}
+.verify__container input[type="button"]:hover {
+    background-color: #ec971f;
+}
+.forgot-password {
+    text-align: left;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Pretendard', sans-serif;/* 글꼴 변경 */
+    margin-top: -50px;
+    margin-left: 115px;
+}
+.forgot-msg {
+    text-align: left;
+    /*font-size: 15px;*/
+    /*margin-top: -25px;*/
+    color: var(--grey-scale-15);
+    font: var(--text-sm);
+    margin-left: 115px; /* 추가 메시지의 색상 설정 */
+    margin-bottom: 15px;
+}
+.verify-msg {
+    text-align: left;
+    /*font-size: 15px;*/
+    font: var(--text-sm);
+    margin-top: -25px;
+    color: var(--grey-scale-15);
+    margin-left: 115px;
+}

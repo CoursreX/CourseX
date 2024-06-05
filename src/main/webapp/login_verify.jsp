@@ -30,7 +30,7 @@
             String adminName = rs.getString("admin_name");
             String adminDept = rs.getString("admin_dept");
 
-            session.setAttribute("admin", userID);
+            session.setAttribute("user", userID);
             session.setAttribute("adminName", adminName);
             session.setAttribute("adminDept", adminDept);
 %>

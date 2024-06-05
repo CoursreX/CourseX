@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="conn.Conn" %>
 <%
-    Object user = session.getAttribute("admin");
+    Object user = session.getAttribute("user");
 
     if (user == null) {
         response.sendRedirect("login.jsp");
