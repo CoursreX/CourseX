@@ -58,21 +58,17 @@ public class Conn {
         return rs;
     }
 
-    public int cancelEnroll(String studentId, String enrollId) {
-        int updatedCreditLimit = -1;
-        String sql = "{? = call CANCEL_ENROLL(?, ?)}";
+    public void cancelEnroll(String studentId, String enrollId) {
+        String sql = "{call CANCEL_ENROLL(?, ?)}";
 
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
             CallableStatement cstmt = myConn.prepareCall(sql);
 
-            cstmt.registerOutParameter(1, Types.NUMERIC);
-            cstmt.setString(2, studentId);
-            cstmt.setString(3, enrollId);
-
+            cstmt.setString(1, studentId);
+            cstmt.setString(2, enrollId);
             cstmt.execute();
-            updatedCreditLimit = cstmt.getInt(1);
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
@@ -80,7 +76,6 @@ public class Conn {
             System.err.println("cancelEnroll - 수강취소 실패");
             e.printStackTrace();
         }
-        return updatedCreditLimit;
     }
 
     public ResultSet getEnrollInfoSuccess(String studentId) {
@@ -132,6 +127,7 @@ public class Conn {
                 "SET ENROLL_CANCEL = SYSDATE, " +
                 "ENROLL_STAT = 2" +
                 "WHERE ENROLL_ID = ?";
+
 
         try {
             Class.forName(driver);

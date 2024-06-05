@@ -10,13 +10,7 @@
     ResultSet rs = null;
 
     try {
-        int updatedCreditLimit = conn.cancelEnroll(studentId, enrollIdParam);
-        System.out.println(updatedCreditLimit);
-      
-        if(updatedCreditLimit > -1) {
-            session.setAttribute("creditLimit", updatedCreditLimit);
-        }
-      
+        conn.cancelEnroll(studentId, enrollIdParam);
         rs = conn.getEnrollInfoSuccess(studentId);
         while (rs.next()) {
 %>
