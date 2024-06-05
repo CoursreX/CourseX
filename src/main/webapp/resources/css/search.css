@@ -51,3 +51,23 @@
     font: var(--text-exsm-emphasis);
     color: blue;
 }
+
+/* 총 학점 수 보여주는 용도*/
+.show__total__credits {
+    padding: 30px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-10);
+    display: inline;
+}
+
+.show__item {
+    color: var(--primary-blue);
+    display: inline;
+}
+.show_display {
+    display: inline-block;
+    margin-left: 10px;
+}
+.show_display p{
+    display: inline;
+}

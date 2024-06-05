@@ -34,6 +34,11 @@
         </div>
         <button class="search__button">검색</button>
     </form>
+
+    <div class="show__total__credits" style="display: none" >
+        <!-- 총 학점수가 계산된다면 표시됨-->
+    </div>
+
     <div class="content__left__container">
         <table class="table">
             <thead class="table__header">
