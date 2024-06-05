@@ -2,6 +2,13 @@
 <%@ page import="conn.Conn" %>
 <%@ page import="java.util.*" %>
 <%
+    Object user = session.getAttribute("admin");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
+<%
     String searchOption = request.getParameter("searchOption");
     String search = request.getParameter("search");
 

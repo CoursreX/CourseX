@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Object user = session.getAttribute("admin");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 
 <div class="menu">
     <div class="menu__item1">

@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="conn.Conn" %>
+<%
+    Object user = session.getAttribute("admin");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 
 <div class="content__left">
 
