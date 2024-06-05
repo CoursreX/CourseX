@@ -1,0 +1,17 @@
+-- 증원 현황을 보기 위한 뷰 생성, 교수명을 찾기 위해 서브쿼리를 이용한 중첩질의 이용
+CREATE VIEW ADD_HISTORY_VIEW AS
+SELECT H.HISTORY_ID,
+       H.EXPANDED_NO,
+       C.COURSE_ID,
+       C.COURSE_NO,
+       C.COURSE_NAME,
+       (SELECT F.FACULTY_NAME
+        FROM FACULTY F
+        WHERE F.FACULTY_ID = (SELECT FACULTY_ID
+                              FROM COURSE
+                              WHERE IS_EXPANDED = H.EXPANDED_NO)) AS FACULTY_NAME,
+       H.BEFORE_CAP,
+       H.UPDATE_CAP,
+       H.INCREASE_DATE
+FROM ADD_HISTORY H
+JOIN COURSE C ON H.EXPANDED_NO = C.IS_EXPANDED;
