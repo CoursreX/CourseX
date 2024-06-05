@@ -3,15 +3,15 @@
 <%@ page import="conn.Conn" %>
 
 <%
+    String studentId = (String) session.getAttribute("user");
     String enrollIdParam = request.getParameter("enrollId");
 
     Conn conn = new Conn();
     ResultSet rs = null;
 
-    conn.dropEnroll(enrollIdParam);
+    conn.dropEnroll(studentId, enrollIdParam);
 
     try {
-        String studentId = (String) session.getAttribute("user");
         rs = conn.getEnrollDropInfo(studentId);
         while (rs.next()) {
 %>

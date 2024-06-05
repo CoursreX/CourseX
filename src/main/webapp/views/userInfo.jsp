@@ -1,11 +1,13 @@
+<%@ page import="conn.Conn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    Conn conn = new Conn();
     String userName = (String) session.getAttribute("userName");
     String userId = (String) session.getAttribute("user");
     String major = (String) session.getAttribute("major");
     Integer semester = (Integer) session.getAttribute("semester");
-    String creditLimit = request.getParameter("creditLimit");
+    int creditLimit = conn.getCreditLimit(userId);
 %>
 
 <aside id="user-info">

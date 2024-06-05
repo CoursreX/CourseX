@@ -10,13 +10,7 @@
     ResultSet rs = null;
 
     try {
-        int updatedCreditLimit = conn.cancelEnroll(studentId, enrollIdParam);
-        System.out.println(updatedCreditLimit);
-      
-        if(updatedCreditLimit > -1) {
-            session.setAttribute("creditLimit", updatedCreditLimit);
-        }
-      
+        conn.cancelEnroll(studentId, enrollIdParam);
         rs = conn.getEnrollInfoSuccess(studentId);
         while (rs.next()) {
 %>
@@ -31,7 +25,7 @@
     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
     <td class="table__cell">
         <button class="default__button cancel__enroll__button"
-                data-enrollid="<%= rs.getString("ENROLL_ID")%>"
+                data-enroll-id="<%= rs.getString("ENROLL_ID")%>"
                 data-course-name="<%= rs.getString("COURSE_NAME")%>"
                 data-course-no="<%= rs.getInt("COURSE_NO")%>">
             취소

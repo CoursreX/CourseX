@@ -9,14 +9,36 @@ public class Conn {
     String user = "coursex";
     String password = "0000";
 
+    private Connection conn;
+    public Conn() {
+        try {
+            // JDBC 드라이버 로드
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName(driver);
+        return DriverManager.getConnection(url, user, password);
+    }
+
+    public void close() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }
+    }
+
     public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
+        Connection conn;
+        CallableStatement cstmt = null;
         ResultSet rs = null;
         String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
 
         try {
-            Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            CallableStatement cstmt = myConn.prepareCall(sql);
+            conn = getConnection();
+            cstmt = conn.prepareCall(sql);
 
             cstmt.setString(1, studentId);
             cstmt.setInt(2, year == 0 ? 2024 : year);
@@ -36,21 +58,17 @@ public class Conn {
         return rs;
     }
 
-    public int cancelEnroll(String studentId, String enrollId) {
-        int updatedCreditLimit = -1;
-        String sql = "{? = call CANCEL_ENROLL(?, ?)}";
+    public void cancelEnroll(String studentId, String enrollId) {
+        String sql = "{call CANCEL_ENROLL(?, ?)}";
 
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
             CallableStatement cstmt = myConn.prepareCall(sql);
 
-            cstmt.registerOutParameter(1, Types.NUMERIC);
-            cstmt.setString(2, studentId);
-            cstmt.setString(3, enrollId);
-
+            cstmt.setString(1, studentId);
+            cstmt.setString(2, enrollId);
             cstmt.execute();
-            updatedCreditLimit = cstmt.getInt(1);
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
@@ -58,7 +76,6 @@ public class Conn {
             System.err.println("cancelEnroll - 수강취소 실패");
             e.printStackTrace();
         }
-        return updatedCreditLimit;
     }
 
     public ResultSet getEnrollInfoSuccess(String studentId) {
@@ -105,19 +122,18 @@ public class Conn {
         return rs;
     }
 
-    public void dropEnroll(String enrollId) {
-        String sql = "UPDATE ENROLL " +
-                "SET ENROLL_CANCEL = SYSDATE, " +
-                "ENROLL_STAT = 2" +
-                "WHERE ENROLL_ID = ?";
+    public void dropEnroll(String studentId, String enrollId) {
+        Connection conn = null;
+        CallableStatement cstmt = null;
+        String sql = "{CALL DROP_ENROLL(?, ?)}";
 
         try {
-            Class.forName(driver);
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            conn = getConnection();
+            cstmt = conn.prepareCall(sql);
 
-            pstmt.setString(1, enrollId);
-            pstmt.executeUpdate();
+            cstmt.setString(1, studentId);
+            cstmt.setString(2, enrollId);
+            cstmt.executeUpdate();
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버 로딩 실패");
             e.printStackTrace();
@@ -232,27 +248,6 @@ public class Conn {
     }
   
     //createCourse_post.jsp
-    private Connection conn;
-    public Conn() {
-        try {
-            // JDBC 드라이버 로드
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName(driver);
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    public void close() throws SQLException {
-        if (conn != null) {
-            conn.close();
-        }
-    }
-
     //addSeats.jsp 검색 기능
     public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {
         List<Map<String, Object>> courseResult = new ArrayList<>();
@@ -263,8 +258,6 @@ public class Conn {
         try {
             conn = getConnection(); // conn 초기화
             String sql = "";
-            System.out.println("db연결 완료.");
-
 
             if ("id".equals(searchOption)) { //searchById
                 sql = "SELECT c.*, (c.COURSE_CAP - c.COURSE_ENROLLED) AS course_seats, f.FACULTY_NAME " +
@@ -311,5 +304,37 @@ public class Conn {
             }
         }
         return courseResult;
+    }
+
+    public int getCreditLimit(String userId){
+        int limitCredit=0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection(); // conn 초기화
+            String sql = "select credit_limit from student where student_id=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                limitCredit = rs.getInt("credit_limit");
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return limitCredit;
     }
 }
