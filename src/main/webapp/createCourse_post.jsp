@@ -54,6 +54,7 @@
         ResultSet rs = null;
         //출력할 에러 메시지
         List<String> errorMessages = new ArrayList<>();
+        String expandedId = null;
 
     try {
         conn = dbConn.getConnection();
