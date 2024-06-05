@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./resources/css/userInfo.css" />
     <link rel="stylesheet" href="./resources/css/addSeats.css" />
     <link rel="stylesheet" href="resources/css/createCourse.css"/>
+    <link rel="stylesheet" href="resources/css/showHistory.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -20,10 +21,12 @@
     </main>
 </section>
 <a href="hello-servlet">Hello Servlet</a>
+<script src="resources/js/updateSelectedMenu.js"></script>
 <script src="resources/js/addSeatsConfirm.js"></script>
 <script src="resources/js/loadContent.js"></script>
 <script src="resources/js/daySelection.js"></script>
 <script src="resources/js/addSearchResults.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="resources/js/logout.js" ></script>
 </body>
 </html>
