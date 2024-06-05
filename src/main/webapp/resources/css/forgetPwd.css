@@ -1,0 +1,95 @@
+.forget__layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.forget__container {
+    width: 900px; /* 너비를 크게 설정 */
+    height: 600px; /* 높이를 크게 설정 */
+    background-color: var(--primary-navi); /* 더 짙은 남색 배경 */
+    border-radius: 15px; /* 모서리 둥글게 */
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: var(--grey-scale-0); /* 텍스트 색상을 흰색으로 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.forget__container h2 {
+    margin-bottom: 20px;
+}
+.forget__container input[type="text"],
+.forget__container input[type="password"] {
+    width: 70%;
+    padding: 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font: var(--title-md);  /* 글꼴 크기를 조금 더 크게 설정 */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--grey-scale-0);
+}
+.forget__container input[type="submit"] {
+    width: 75%;
+    padding: 20px;
+    margin: 10px 5%;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-blue); /* 버튼 색깔 */
+    color: var(--grey-scale-0);
+    font-size: 16px; /* 버튼 글꼴 크기를 조금 더 크게 설정 */
+    cursor: pointer;
+}
+.forget__container input[type="submit"]:hover {
+    background-color: #ec971f; /* 버튼 hover 색상 */
+}
+
+.forget__container input[type="button"] {
+    width: 75%;
+    padding: 20px;
+    margin: 10px 5%;
+    border: none;
+    border-radius: 5px;
+    /*background-color:  rgba(255, 255, 255, 0.1); !* 버튼 색깔 *!*/
+    /*color: white;*/
+    background-color: var(--grey-scale-90);
+    color: var(--grey-scale-0);
+    /*font-size: 16px; /* 버튼 글꼴 크기를 조금 더 크게 설정 */
+    font: var(--text-md);
+    cursor: pointer;
+}
+.forget__container input[type="button"]:hover {
+    background-color: #ec971f; /* 버튼 hover 색상 */
+}
+
+.forgot-password {
+    text-align: left;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Pretendard', sans-serif;/* 글꼴 변경 */
+    margin-top: -50px;
+    margin-left: 115px;
+}
+.forgot-msg {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    /*font-size: 15px; /* 글꼴 크기를 작게 설정 */
+    /*margin-top: -25px; /* 위쪽 여백 설정 */
+    font: var(--text-sm);
+    color: var(--grey-scale-15);
+    margin-left: 115px; /* 추가 메시지의 색상 설정 */
+    margin-bottom: 15px;
+}
+.verify-msg {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    /*font-size: 15px; /* 글꼴 크기를 작게 설정 */
+    font: var(--text-sm);
+    margin-top: -25px; /* 위쪽 여백 설정 */
+    color: var(--grey-scale-15);
+    margin-left: 115px;
+}

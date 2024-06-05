@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String adminName = (String) session.getAttribute("adminName");
-    String adminId = (String) session.getAttribute("admin");
+    String adminId = (String) session.getAttribute("user");
     String adminDept = (String) session.getAttribute("adminDept");
 
 %>

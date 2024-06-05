@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="./resources/css/search.css" />
     <link rel="stylesheet" href="./resources/css/enroll.css"/>
     <link rel="stylesheet" href="./resources/css/login.css" />
+    <link rel="stylesheet" href="./resources/css/restPwd.css" />
+    <link rel="stylesheet" href="./resources/css/forgetPwd.css" />
+    <link rel="stylesheet" href="./resources/css/pwdVerify.css" />
+
 </head>
 <body>
 <section id="root">
