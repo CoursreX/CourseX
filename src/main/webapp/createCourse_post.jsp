@@ -166,8 +166,19 @@
 
 <%
 } else {
+
+    // IS_EXPANDED 고유 값 생성
+    String expandedIdSql = "SELECT 'CA' || TO_CHAR(my_sequence.NEXTVAL, 'FM000') AS expandedId FROM dual";
+    pstmt = conn.prepareStatement(expandedIdSql);
+    rs = pstmt.executeQuery();
+    if (rs.next()) {
+        expandedId = rs.getString("expandedId");
+    }
+    rs.close();
+    pstmt.close();
+
     // 최종 COURSE 테이블에 정보 저장하기
-    String sql = "INSERT INTO COURSE (COURSE_ID, COURSE_NO, FACULTY_ID, COURSE_NAME, COURSE_CREDIT, COURSE_CAP, COURSE_DAY, COURSE_TIME, COURSE_ROOM, COURSE_CATEGORY, COURSE_ENROLLED, IS_OPENED) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO COURSE (COURSE_ID, COURSE_NO, FACULTY_ID, COURSE_NAME, COURSE_CREDIT, COURSE_CAP, COURSE_DAY, COURSE_TIME, COURSE_ROOM, COURSE_CATEGORY, COURSE_ENROLLED, IS_EXPANDED, IS_OPENED) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     pstmt = conn.prepareStatement(sql);
     pstmt.setString(1, courseId);
     pstmt.setInt(2, Integer.parseInt(courseNo));
@@ -180,7 +191,8 @@
     pstmt.setString(9, courseLocation);
     pstmt.setString(10, courseCategory);
     pstmt.setInt(11, 0);
-    pstmt.setInt(12, 0);
+    pstmt.setString(12, expandedId);
+    pstmt.setInt(13, 0);
 
     // 쿼리 실행
     int rows = pstmt.executeUpdate();

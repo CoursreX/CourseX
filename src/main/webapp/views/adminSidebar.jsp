@@ -21,17 +21,17 @@
                      alt="증원하기" />
                 <div>증원하기</div>
             </div>
-            <div class="sidebar__menu" onclick="loadContent('reset_password.jsp');">
-                <img src="${pageContext.request.contextPath}/resources/assets/key.svg"
-                     data-original-src="${pageContext.request.contextPath}/resources/assets/key.svg"
-                     data-selected-src="${pageContext.request.contextPath}/resources/assets/key-white.svg"
-                     alt="비밀번호 재설정" />
-                <div>비밀번호 재설정</div>
-            </div>
+            <div class="sidebar__menu" onclick="loadContent('showHistory.jsp');">
+            <img src="${pageContext.request.contextPath}/resources/assets/order.svg"
+                 data-original-src="${pageContext.request.contextPath}/resources/assets/order.svg"
+                 data-selected-src="${pageContext.request.contextPath}/resources/assets/order-white.svg"
+                 alt="증원이력" />
+            <div>증원이력</div>
+        </div>
         </div>
     </div>
-    <div class="sidebar__bottom" onclick="loadContent('admin_logout.jsp');">
-        <div class="sidebar__logout">
+    <div class="sidebar__bottom">
+        <div class="sidebar__logout" onclick="logout();">
             <img src="${pageContext.request.contextPath}/resources/assets/logout.svg" alt="로그아웃"/>
             <div>로그아웃</div>
         </div>

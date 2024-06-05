@@ -1,0 +1,5 @@
+.show__list {
+    padding: 40px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-10);
+}

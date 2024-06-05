@@ -14,9 +14,11 @@
 
     try { // DB와 통신을 해서 course_cap에 사용자가 입력한 증원 인원 더하기
         conn = dbConn.getConnection();
+        conn.setAutoCommit(false); // 자동 커밋 비활성화
 
-        String inceaseCapSql = "SELECT COURSE_CAP FROM COURSE WHERE COURSE_ID = ? AND COURSE_NO = ?";
-        pstmt = conn.prepareStatement(inceaseCapSql);
+
+        String increaseCapSql = "SELECT COURSE_CAP FROM COURSE WHERE COURSE_ID = ? AND COURSE_NO = ?";
+        pstmt = conn.prepareStatement(increaseCapSql);
         pstmt.setString(1, courseId);
         pstmt.setString(2, courseNo);
         rs = pstmt.executeQuery();
@@ -24,7 +26,8 @@
             int exCourseCap = rs.getInt("COURSE_CAP");
             int newCourseCap = exCourseCap + Integer.parseInt(increaseAmount);
 
-            pstmt.close(); // 첫 번째 PreparedStatement 닫기
+            rs.close();
+            pstmt.close();
 
             String updateCapSql = "UPDATE COURSE SET COURSE_CAP = ? WHERE COURSE_ID = ? AND COURSE_NO = ?";
             pstmt = conn.prepareStatement(updateCapSql);
