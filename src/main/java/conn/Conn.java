@@ -24,6 +24,33 @@ public class Conn {
         return DriverManager.getConnection(url, user, password);
     }
 
+    //과목 정보 조회 메소드
+    public ResultSet getCourseInfo(String searchType, String searchValue) {
+        ResultSet rs = null;
+        String sql = "{call GET_COURSE_INFO(?, ?, ?)}";
+
+        try {
+            Class.forName(driver);
+            Connection myConn = DriverManager.getConnection(url, user, password);
+            CallableStatement cstmt = myConn.prepareCall(sql);
+
+            cstmt.setString(1, searchType);
+            cstmt.setString(2, searchValue);
+            cstmt.registerOutParameter(3, Types.REF_CURSOR);
+
+            cstmt.execute();
+
+            rs = (ResultSet) cstmt.getObject(3);
+        } catch (ClassNotFoundException e) {
+            System.out.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("오라클 연결 실패");
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
         Connection conn;
         CallableStatement cstmt = null;
@@ -329,5 +356,36 @@ public class Conn {
             }
         }
         return limitCredit;
+    }
+
+    public String getMajor(String majorId) {
+        String majorName="";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection(); // conn 초기화
+            String sql = "select major_name from major where major_id=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, majorId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                majorName = rs.getString("major_name");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return majorName;
     }
 }

@@ -5,8 +5,9 @@
     Conn conn = new Conn();
     String userName = (String) session.getAttribute("userName");
     String userId = (String) session.getAttribute("user");
-    String major = (String) session.getAttribute("major");
+    String majorId = (String) session.getAttribute("major");
     Integer semester = (Integer) session.getAttribute("semester");
+    String major = conn.getMajor(majorId);
     int creditLimit = conn.getCreditLimit(userId);
 %>
 
@@ -21,7 +22,7 @@
     </div>
     <div class="user-info__item">
         <span class="user-info__label">전공</span>
-        <div class="user-info__value"><%= ("M001".equals(major)) ? "소프트웨어학부" : major %></div>
+        <div class="user-info__value"><%= major %></div>
     </div>
     <div class="user-info__item">
         <span class="user-info__label">학기</span>
