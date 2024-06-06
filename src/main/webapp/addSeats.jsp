@@ -6,6 +6,7 @@
 
     if (user == null) {
         response.sendRedirect("login.jsp");
+        return;
     }
 %>
 <%
@@ -23,7 +24,7 @@
     <form id="addSeats_search_form" class="add_search__filter">
     	<div class="add_search__filter__element">
     		<input type="radio" id="searchById" name="searchOption" value="id" checked>
-    		<label for="searchById">과목코드 검색</label>
+    		<label for="searchById">과목번호 검색</label>
     		<input type="radio" id="searchByName" name ="searchOption" value="name">
     		<label for="searchByName">과목명 검색</label>
     	</div>

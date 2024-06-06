@@ -11,7 +11,7 @@ BEGIN
     INTO v_time_diff
     FROM DUAL;
 
-    IF v_time_diff < 0 THEN
+    IF v_time_diff <= 0 THEN
         RETURN 0; -- 시작시간이 종료시간보다 늦을 때
     ELSE
         RETURN 1; -- 시작시간이 종료시간보다 빠를 때

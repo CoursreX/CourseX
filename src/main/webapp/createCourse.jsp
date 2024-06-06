@@ -141,7 +141,7 @@
 
                 </div>
 
-                <div class="upload"><button class="create__button" type="submit" onsubmit="adminCheck()">등록하기</button></div>
+                <div class="upload"><button class="create__button" type="submit">등록하기</button></div>
 
             </form>
 

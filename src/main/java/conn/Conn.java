@@ -24,12 +24,6 @@ public class Conn {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void close() throws SQLException {
-        if (conn != null) {
-            conn.close();
-        }
-    }
-
     //과목 정보 조회 메소드
     public ResultSet getCourseInfo(String searchType, String searchValue) {
         ResultSet rs = null;
@@ -273,8 +267,7 @@ public class Conn {
 
         return isPeriod;
     }
-  
-    //createCourse_post.jsp
+
     //addSeats.jsp 검색 기능
     public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {
         List<Map<String, Object>> courseResult = new ArrayList<>();
