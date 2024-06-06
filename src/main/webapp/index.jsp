@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./resources/css/sidebar.css" />
     <link rel="stylesheet" href="./resources/css/userInfo.css" />
     <link rel="stylesheet" href="resources/css/main.css"/>
-    <link rel="stylesheet" href="./resources/css/search.css" />
+    <link rel="stylesheet" href="resources/css/enrollSearch.css" />
     <link rel="stylesheet" href="./resources/css/enroll.css"/>
     <link rel="stylesheet" href="./resources/css/login.css" />
     <link rel="stylesheet" href="./resources/css/restPwd.css" />
