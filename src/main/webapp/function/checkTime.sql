@@ -17,3 +17,4 @@ BEGIN
         RETURN 1; -- 시작시간이 종료시간보다 빠를 때
     END IF;
 END;
+/
