@@ -18,12 +18,11 @@
 </head>
 <body>
 <section id="root">
-    <%@ include file="/views/sidebar.jsp" %>
+    <%@ include file="/components/sidebar.jsp" %>
     <main id="content">
         <%@ include file="/main.jsp" %>
     </main>
 </section>
-<a href="hello-servlet">Hello Servlet</a>
 <script src="resources/js/updateSelectedMenu.js"></script>
 <script src="resources/js/loadContent.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

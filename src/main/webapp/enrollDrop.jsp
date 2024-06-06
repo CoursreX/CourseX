@@ -100,5 +100,5 @@
     }
 %>
 <div class="content__right">
-    <jsp:include page="/views/userInfo.jsp" />
+    <jsp:include page="/components/userInfo.jsp" />
 </div>

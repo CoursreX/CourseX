@@ -15,7 +15,7 @@ $(document).ready(function() {
                 $('.table__body').html(response);
 
                 $.ajax({
-                    url: 'http://localhost:8080/CourseX_war_exploded/views/userInfo.jsp', // userInfo.jsp의 경로에 맞게 수정
+                    url: 'http://localhost:8080/CourseX_war_exploded/components/userInfo.jsp', // userInfo.jsp의 경로에 맞게 수정
                     success: function(userInfoResponse) {
                         console.log('userInfo.jsp를 새로 로드합니다.');
                         $('.content__right').html(userInfoResponse);

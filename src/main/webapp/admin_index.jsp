@@ -15,12 +15,11 @@
 </head>
 <body>
 <section id="root">
-    <%@ include file="/views/adminSidebar.jsp" %>
+    <%@ include file="/components/adminSidebar.jsp" %>
     <main id="content">
         <%@ include file="/admin_main.jsp" %>
     </main>
 </section>
-<a href="hello-servlet">Hello Servlet</a>
 <script src="resources/js/updateSelectedMenu.js"></script>
 <script src="resources/js/addSeatsConfirm.js"></script>
 <script src="resources/js/loadContent.js"></script>

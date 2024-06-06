@@ -2,11 +2,10 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/conn/Conn.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/PLSQL/sumCredit.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/procedure/InsertEnroll.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/procedure/dropEnroll.sql" dialect="Oracle" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/procedure/updateCreditLimit.sql" dialect="Oracle" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/sql/InsertEnroll.sql" dialect="Oracle" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/sql/course.sql" dialect="Oracle" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/resources/sql/student.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/table/course.sql" dialect="Oracle" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/table/student.sql" dialect="Oracle" />
   </component>
 </project>
