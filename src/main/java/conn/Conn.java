@@ -337,4 +337,35 @@ public class Conn {
         }
         return limitCredit;
     }
+
+    public String getMajor(String majorId) {
+        String majorName="";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection(); // conn 초기화
+            String sql = "select major_name from major where major_id=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, majorId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                majorName = rs.getString("major_name");
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return majorName;
+    }
 }
