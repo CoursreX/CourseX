@@ -151,5 +151,5 @@
 
 
 <div id="content__right">
-    <%@ include file="/views/adminInfo.jsp" %>
+    <%@ include file="/components/adminInfo.jsp" %>
 </div>
