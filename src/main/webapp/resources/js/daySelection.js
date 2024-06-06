@@ -15,12 +15,3 @@ function daySelection(day) {
     console.log(selectedDaysInput)
 }
 
-/*function resetDayButtons() { // 새로고침 초기화
-    const days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    days.forEach(day => {
-        document.getElementById(day).addEventListener('click', () => daySelection(day));
-    });
-}
-
-window.onload = resetDayButtons;
-*/
