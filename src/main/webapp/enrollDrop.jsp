@@ -40,7 +40,7 @@
                     String studentId = (String) session.getAttribute("user");
 
                     try {
-                        rs = conn.getEnrollDropInfo(studentId);
+                        rs = conn.getEnrollInfoAll(studentId);
                         if(!rs.next()) {
                 %>
                 <tr>
