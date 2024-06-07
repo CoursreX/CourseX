@@ -51,7 +51,7 @@
                 <th class="table__cell">강의실</th>
                 <th class="table__cell">강의시간</th>
                 <th class="table__cell">정원</th>
-                <th class="table__cell">신청결과</th>
+                <th class="table__cell">수강상태</th>
             </tr>
             </thead>
             <tbody class="table__body">
@@ -67,7 +67,7 @@
                     ResultSet rs = null;
 
                     try {
-                        rs = conn.getEnrollInfoAll(studentId, currentYear, currentSemester);
+                        rs = conn.searchEnroll(studentId, currentYear, currentSemester);
                         if (!rs.next()) {
                 %>
                 <tr>
@@ -87,15 +87,16 @@
                     <td class="table__cell"><%= rs.getString("COURSE_DAY") %> <%= rs.getString("COURSE_TIME") %></td>
                     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
                     <%
-                        String enrollStat = rs.getString("ENROLL_STAT"); // ENROLL_STAT 값 가져오기
-                        String colorClass = ""; // 초기 클래스 값
-
-                        // ENROLL_STAT 값에 따라 클래스 선택
-                        if (enrollStat.equals("신청완료")) {
-                            colorClass = "enroll__success";
+                        String enrollStat = "";
+                        String classColor = "";
+                        if (rs.getInt("ENROLL_STAT") == 1) {
+                            enrollStat = "신청완료";
+                            classColor = "enroll__completed";
+                        } else if (rs.getInt("ENROLL_STAT") == 2) {
+                            enrollStat = "수강포기";
                         }
                     %>
-                    <td class="table__cell <%= colorClass %>"><%= rs.getString("ENROLL_STAT") %></td>
+                    <td class="table__cell <%= classColor %>"><%= enrollStat %></td>
                 </tr>
                 <%
                             } while(rs.next());

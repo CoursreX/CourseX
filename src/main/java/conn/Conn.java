@@ -51,11 +51,11 @@ public class Conn {
         return rs;
     }
 
-    public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
+    public ResultSet searchEnroll(String studentId, int year, int semester) {
         Connection conn;
         CallableStatement cstmt = null;
         ResultSet rs = null;
-        String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
+        String sql = "{call SEARCH_ENROLL(?, ?, ?, ?)}";
 
         try {
             conn = getConnection();
@@ -125,7 +125,6 @@ public class Conn {
                 "ELSE 2 " +
                 "END " +
                 "AND E.ENROLL_STAT = 1";
-
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
@@ -164,7 +163,7 @@ public class Conn {
         }
     }
 
-    public ResultSet getEnrollDropInfo(String studentId) {
+    public ResultSet getEnrollInfoAll(String studentId) {
         ResultSet rs = null;
         String sql = "SELECT " +
                 "E.ENROLL_ID AS ENROLL_ID, " +
@@ -189,8 +188,7 @@ public class Conn {
                 "AND E.ENROLL_SEM = CASE " +
                 "WHEN TO_NUMBER(TO_CHAR(SYSDATE, 'MM')) BETWEEN 2 AND 7 THEN 1 " +
                 "ELSE 2 " +
-                "END " +
-                "AND E.ENROLL_STAT IN (1, 2)";
+                "END";
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);

@@ -12,7 +12,7 @@
     conn.dropEnroll(studentId, enrollIdParam);
 
     try {
-        rs = conn.getEnrollDropInfo(studentId);
+        rs = conn.getEnrollInfoAll(studentId);
         while (rs.next()) {
 %>
 <tr>

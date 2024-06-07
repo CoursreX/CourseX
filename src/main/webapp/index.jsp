@@ -29,7 +29,7 @@
 <script src="resources/js/searchForm.js"></script>
 <script src="resources/js/getCourseInfo.js"></script>
 <script src="resources/js/cancelEnroll.js" ></script>
-<script src="resources/js/getEnrollInfoAll.js" ></script>
+<script src="resources/js/searchEnroll.js" ></script>
 <script src="resources/js/dropEnroll.js" ></script>
 <script src="resources/js/logout.js" ></script>
 </body>

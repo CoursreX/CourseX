@@ -47,7 +47,7 @@
     filter: brightness(1.2);
 }
 
-.enroll__success {
+.enroll__completed {
     font: var(--text-exsm-emphasis);
     color: blue;
 }
