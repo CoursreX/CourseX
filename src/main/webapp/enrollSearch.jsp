@@ -51,7 +51,7 @@
                 <th class="table__cell">강의실</th>
                 <th class="table__cell">강의시간</th>
                 <th class="table__cell">정원</th>
-                <th class="table__cell">신청결과</th>
+                <th class="table__cell">수강상태</th>
             </tr>
             </thead>
             <tbody class="table__body">
