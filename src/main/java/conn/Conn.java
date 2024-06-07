@@ -51,11 +51,11 @@ public class Conn {
         return rs;
     }
 
-    public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
+    public ResultSet searchEnroll(String studentId, int year, int semester) {
         Connection conn;
         CallableStatement cstmt = null;
         ResultSet rs = null;
-        String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
+        String sql = "{call SEARCH_ENROLL(?, ?, ?, ?)}";
 
         try {
             conn = getConnection();
@@ -125,7 +125,6 @@ public class Conn {
                 "ELSE 2 " +
                 "END " +
                 "AND E.ENROLL_STAT = 1";
-
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
