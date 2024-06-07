@@ -15,13 +15,13 @@ SELECT
     C.course_room AS COURSE_ROOM,
     C.course_day AS COURSE_DAY,
     C.course_time AS COURSE_TIME,
-    C.course_cap AS COURSE_CAP
+    C.course_cap AS COURSE_CAP,
+    E.enroll_stat AS ENROLL_STAT
 FROM ENROLL E
          JOIN COURSE C ON E.course_id = C.course_id AND E.course_no = C.course_no
          JOIN FACULTY F ON C.faculty_id = F.faculty_id
 WHERE E.student_id = v_student_id
   AND E.enroll_year = v_enroll_year
-  AND E.enroll_sem = v_enroll_sem
-  AND E.ENROLL_STAT = 1;
+  AND E.enroll_sem = v_enroll_sem;
 END;
 /

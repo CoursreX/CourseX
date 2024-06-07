@@ -86,7 +86,17 @@
                     <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
                     <td class="table__cell"><%= rs.getString("COURSE_DAY") %> <%= rs.getString("COURSE_TIME") %></td>
                     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
-                    <td class="table__cell enroll__success">신청완료</td>
+                    <%
+                        String enrollStat = "";
+                        String classColor = "";
+                        if (rs.getInt("ENROLL_STAT") == 1) {
+                            enrollStat = "신청완료";
+                            classColor = "enroll__completed";
+                        } else if (rs.getInt("ENROLL_STAT") == 2) {
+                            enrollStat = "수강포기";
+                        }
+                    %>
+                    <td class="table__cell <%= classColor %>"><%= enrollStat %></td>
                 </tr>
                 <%
                             } while(rs.next());
