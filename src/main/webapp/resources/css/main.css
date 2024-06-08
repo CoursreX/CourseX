@@ -34,7 +34,7 @@
     padding: 40px;
     border-radius: 25px;
     background-color: var(--grey-scale-10);
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .menu__item2 img,

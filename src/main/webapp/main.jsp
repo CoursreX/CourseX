@@ -8,7 +8,7 @@
     }
 %>
 
-<div class="menu">
+<div class="content__left">
     <div class="menu__item1">
         <h1>CourseX에 오신 것을 환영합니다!</h1>
         <h6>CourseX는 어떻게 사용할까요?</h6>
