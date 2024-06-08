@@ -31,9 +31,10 @@
     %>
     <td class="table__cell <%= colorClass %>"><%= openedStatus %></td>
     <td class="table__cell">
-        <button id="enrollButton" onclick="handleEnrollButtonClick('<%= rs.getString("COURSE_ID") %>', '<%= rs.getString("COURSE_NO") %>')">수강신청</button>
-    </td>
-</tr>
+        <button id="enrollButton" class="enrollButton"
+                data-course-id="<%= rs.getString("COURSE_ID") %>"
+                data-course-no="<%= rs.getString("COURSE_NO") %>"
+                data-student-id="<%= session.getAttribute("user") %>">수강신청</button></tr>
 <%
         }
     } catch (SQLException e) {

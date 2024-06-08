@@ -2,7 +2,17 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import="conn.Conn" %>
 
+<%
+    Object user = session.getAttribute("user");
+
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <div class="content__left">
+
     <div class="enroll__filter">
         <form class="enroll__filter__radio" onchange="handleRadio(event)">
             <div class="enroll__radio">
@@ -17,18 +27,18 @@
         <form id="searchCode" class="enroll__filter__container"  method="get" data-search-type='COURSE_ID' style="display: block;">
             <div class="enroll__filter__element" id="searchCodeInput">
                 <label for="code">과목코드</label>
-                <input type="text" id="code" name="searchValue" placeholder="과목코드 입력">
+                <input class="enroll_input" type="text" id="code" name="searchValue" placeholder="과목코드 입력">
                 <input type="hidden" name="searchType" value="code">
-                <button type="submit">검색</button>
+                <button class = "enroll_search__button" type="submit">검색</button>
             </div>
         </form>
 
         <form id="searchName" class="enroll__filter__container"  method="get" data-search-type='COURSE_NAME' style="display: none;">
             <div class="enroll__filter__element" id="searchNameInput">
                 <label for="name">과목명</label>
-                <input type="text" id="name" name="searchValue" placeholder="과목명 입력">
+                <input class="enroll_input" type="text" id="name" name="searchValue" placeholder="과목명 입력">
                 <input type="hidden" name="searchType" value="name">
-                <button type="submit">검색</button>
+                <button class = "enroll_search__button" type="submit">검색</button>
             </div>
         </form>
 
@@ -43,13 +53,13 @@
                     <option value="교직">교직</option>
                 </select>
                 <input type="hidden" name="searchType" value="category">
-                <button type="submit">검색</button>
+                <button class = "enroll_search__button" type="submit">검색</button>
             </div>
         </form>
     </div>
 
     <!-- 검색 결과 테이블-->
-    <div class="search__result">
+    <div class="content__left__container">
         <table class="table">
             <thead class="table__header">
             <tr>
@@ -95,9 +105,7 @@
                 %>
                 <td class="table__cell <%= colorClass %>"><%= openedStatus %></td>
                 <td class="table__cell">
-                    <button id="enrollButton" onclick="handleEnrollButtonClick('<%= rs.getString("COURSE_ID") %>', '<%= rs.getString("COURSE_NO") %>')">수강신청</button>
-                </td>
-            </tr>
+                    <button id="enrollButton" class="enrollButton" onclick="handleEnrollButtonClick('<%= rs.getString("COURSE_ID") %>', '<%= rs.getString("COURSE_NO") %>', '<%= session.getAttribute("user") %>')">수강신청</button>            </tr>
             <%
                     }
                 } catch (SQLException e) {
@@ -115,6 +123,7 @@
         </table>
     </div>
 </div>
+
 
 <div id="content__right">
     <jsp:include page="/components/userInfo.jsp" />
