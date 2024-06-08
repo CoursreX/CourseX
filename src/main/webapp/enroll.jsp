@@ -105,7 +105,9 @@
                 %>
                 <td class="table__cell <%= colorClass %>"><%= openedStatus %></td>
                 <td class="table__cell">
-                    <button id="enrollButton" class="enrollButton" onclick="handleEnrollButtonClick('<%= rs.getString("COURSE_ID") %>', '<%= rs.getString("COURSE_NO") %>', '<%= session.getAttribute("user") %>')">수강신청</button>            </tr>
+                    <button id="enrollButton" class="enrollButton" data-enroll-id="" data-enroll-no="" data-student-id="" onclick="handleEnrollButtonClick('<%= rs.getString("COURSE_ID") %>', '<%= rs.getString("COURSE_NO") %>', '<%= session.getAttribute("user") %>')">수강신청</button>
+                </td>
+            </tr>
             <%
                     }
                 } catch (SQLException e) {
@@ -123,8 +125,6 @@
         </table>
     </div>
 </div>
-
-
-<div id="content__right">
+<div class="content__right">
     <jsp:include page="/components/userInfo.jsp" />
 </div>
