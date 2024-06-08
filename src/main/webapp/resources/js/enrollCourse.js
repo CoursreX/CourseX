@@ -23,6 +23,17 @@ $(document).ready(function() {
                 } else {
                     alert(response);
                 }
+
+                $.ajax({
+                    url: 'http://localhost:8080/CourseX_war_exploded/components/userInfo.jsp', // userInfo.jsp의 경로에 맞게 수정
+                    success: function(userInfoResponse) {
+                        console.log('userInfo.jsp를 새로 로드합니다.');
+                        $('.content__right').html(userInfoResponse);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('userInfo.jsp를 로드하는데 실패했습니다.');
+                    }
+                });
             },
             error: function(xhr, status, error) {
                 console.log(`수강신청 중 오류가 발생했습니다에러: ${xhr}`);

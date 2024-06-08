@@ -107,7 +107,8 @@ BEGIN
         course_no,
         enroll_date,
         enroll_year,
-        enroll_sem
+        enroll_sem,
+        enroll_stat
     ) VALUES (
                  sEnrollId,
                  sStudentId,
@@ -115,7 +116,8 @@ BEGIN
                  nCourseNo,
                  SYSDATE,
                  nYear,
-                 nSemester
+                 nSemester,
+                 1
              );
     UPDATE_CREDIT_LIMIT(sStudentId, sCourseId, 'ENROLL');
 
