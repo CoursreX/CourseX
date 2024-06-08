@@ -14,6 +14,7 @@ CREATE OR REPLACE PROCEDURE InsertEnroll(
     nCourseCredit NUMBER;
     nCnt NUMBER;
     nCourseCap NUMBER;
+    nCourseApplicant NUMBER;
     nCreditLimit NUMBER;
     sEnrollId VARCHAR2(20);
 BEGIN
@@ -50,18 +51,12 @@ BEGIN
     END IF;
 
     /* 에러처리3: 수강신청 인원초과여부 */
-    SELECT c.course_cap
-    INTO nCourseCap
-    FROM course c
-    WHERE c.course_id = sCourseId AND c.course_no = nCourseNo;
+    SELECT COURSE_CAP, COURSE_ENROLLED
+    INTO nCourseCap, nCourseApplicant
+    FROM COURSE
+    WHERE course_id = sCourseId AND course_no = nCourseNo;
 
-    SELECT COUNT(*)
-    INTO nCnt
-    FROM enroll e
-    WHERE e.enroll_year = nYear AND e.enroll_sem = nSemester
-      AND e.course_id = sCourseId AND e.course_no = nCourseNo;
-
-    IF (nCnt >= nCourseCap) THEN
+    IF (nCourseApplicant >= nCourseCap) THEN
         RAISE too_many_students;
     END IF;
 
@@ -119,6 +114,7 @@ BEGIN
                  1
              );
     UPDATE_CREDIT_LIMIT(sStudentId, sCourseId, 'ENROLL');
+    UPDATE_COURSE_SEATS(sCourseId, nCourseNo, 'ENROLL');
 
 EXCEPTION
     WHEN too_many_sumCourseUnit THEN
