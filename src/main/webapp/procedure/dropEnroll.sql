@@ -1,4 +1,4 @@
-create PROCEDURE DROP_ENROLL (
+create OR REPLACE PROCEDURE DROP_ENROLL (
     v_student_id IN STUDENT.STUDENT_ID%TYPE,
     v_enroll_id IN ENROLL.ENROLL_ID%TYPE
 ) IS
@@ -11,7 +11,7 @@ BEGIN
 
     UPDATE ENROLL
     SET
-        ENROLL_CANCEL = SYSDATE,
+        ENROLL_DROP_DATE = SYSDATE,
         ENROLL_STAT = 2
     WHERE ENROLL_ID = v_enroll_id;
     UPDATE_CREDIT_LIMIT(v_student_id, v_course_id, 'DROP');

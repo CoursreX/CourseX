@@ -25,12 +25,6 @@ public class Conn {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void close() throws SQLException {
-        if (conn != null) {
-            conn.close();
-        }
-    }
-
     //수강신청 가능 과목 정보 조회 메소드
     public ResultSet getCourseInfo(String searchType, String searchValue) {
         ResultSet rs = null;
@@ -103,11 +97,13 @@ public class Conn {
         return result;
     }
 
-    public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
+
+    public ResultSet searchEnroll(String studentId, int year, int semester) {
+
         Connection conn;
         CallableStatement cstmt = null;
         ResultSet rs = null;
-        String sql = "{call GET_ENROLL_INFO(?, ?, ?, ?)}";
+        String sql = "{call SEARCH_ENROLL(?, ?, ?, ?)}";
 
         try {
             conn = getConnection();
@@ -177,7 +173,6 @@ public class Conn {
                 "ELSE 2 " +
                 "END " +
                 "AND E.ENROLL_STAT = 1";
-
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
@@ -216,7 +211,7 @@ public class Conn {
         }
     }
 
-    public ResultSet getEnrollDropInfo(String studentId) {
+    public ResultSet getEnrollInfoAll(String studentId) {
         ResultSet rs = null;
         String sql = "SELECT " +
                 "E.ENROLL_ID AS ENROLL_ID, " +
@@ -229,7 +224,7 @@ public class Conn {
                 "C.COURSE_ROOM AS COURSE_ROOM, " +
                 "C.COURSE_DAY || ' ' || C.COURSE_TIME AS COURSE_TIME, " +
                 "C.COURSE_CAP AS COURSE_CAP, " +
-                "NVL(TO_CHAR(E.ENROLL_CANCEL, 'YYYY.MM.DD'), '없음') AS CANCEL_DATE " +
+                "NVL(TO_CHAR(E.ENROLL_DROP_DATE, 'YYYY.MM.DD'), '없음') AS DROP_DATE " +
                 "FROM " +
                 "ENROLL E " +
                 "JOIN " +
@@ -241,8 +236,7 @@ public class Conn {
                 "AND E.ENROLL_SEM = CASE " +
                 "WHEN TO_NUMBER(TO_CHAR(SYSDATE, 'MM')) BETWEEN 2 AND 7 THEN 1 " +
                 "ELSE 2 " +
-                "END " +
-                "AND E.ENROLL_STAT IN (1, 2)";
+                "END";
         try {
             Class.forName(driver);
             Connection myConn = DriverManager.getConnection(url, user, password);
@@ -320,7 +314,6 @@ public class Conn {
         return isPeriod;
     }
 
-    //createCourse_post.jsp
     //addSeats.jsp 검색 기능
     public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {
         List<Map<String, Object>> courseResult = new ArrayList<>();

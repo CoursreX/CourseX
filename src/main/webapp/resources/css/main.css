@@ -31,6 +31,7 @@
     padding: 40px;
     border-radius: 25px;
     background-color: var(--grey-scale-10);
+    margin-left: 10px;
 }
 
 .menu__item3 {
@@ -40,6 +41,7 @@
     padding: 40px;
     border-radius: 25px;
     background-color: var(--grey-scale-10);
+    margin-left: 10px;
 }
 
 .menu__item4 {
@@ -49,4 +51,24 @@
     padding: 40px;
     border-radius: 25px;
     background-color: var(--grey-scale-10);
+    margin-left: 10px;
+}
+
+.menu__item2 img,
+.menu__item3 img,
+.menu__item4 img {
+    width: 100%;
+}
+
+.menu__item2 li,
+.menu__item3 li,
+.menu__item4 li {
+    padding: 5px;
+}
+
+.menu__item2 p,
+.menu__item3 p,
+.menu__item4 p {
+    font: var(--title-md);
+    padding-bottom:10px;
 }

@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE sumCredit (
+CREATE OR REPLACE PROCEDURE SUM_CREDIT (
     p_student_id IN STUDENT.STUDENT_ID%TYPE,
     p_enroll_year IN ENROLL.ENROLL_YEAR%TYPE,
     p_enroll_sem IN ENROLL.ENROLL_SEM%TYPE,
@@ -11,22 +11,9 @@ CREATE OR REPLACE PROCEDURE sumCredit (
         p_enroll_year IN ENROLL.ENROLL_YEAR%TYPE,
         p_enroll_sem IN ENROLL.ENROLL_SEM%TYPE ) IS
         SELECT
-            C.course_id AS COURSE_ID,
-            C.course_name AS COURSE_NAME,
-            C.course_no AS COURSE_NO,
-            C.course_credit AS COURSE_CREDIT,
-            F.faculty_name AS FACULTY_NAME,
-            C.course_room AS COURSE_ROOM,
-            C.course_day AS COURSE_DAY,
-            C.course_time AS COURSE_TIME,
-            C.course_cap AS COURSE_CAP,
-            CASE
-                WHEN E.enroll_stat = 1 THEN '신청완료'
-                WHEN E.enroll_stat = 0 THEN '신청실패'
-                END AS ENROLL_STAT
+            C.course_credit AS COURSE_CREDIT
         FROM ENROLL E
                  JOIN COURSE C ON E.course_id = C.course_id AND E.course_no = C.course_no
-                 JOIN FACULTY F ON C.faculty_id = F.faculty_id
         WHERE E.student_id = p_student_id
           AND E.enroll_year = p_enroll_year
           AND E.enroll_sem = p_enroll_sem

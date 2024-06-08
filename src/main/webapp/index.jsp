@@ -31,7 +31,7 @@
 <script src="resources/js/enrollButton.js"></script>
 <script src="resources/js/enrollCourse.js"></script>
 <script src="resources/js/cancelEnroll.js" ></script>
-<script src="resources/js/getEnrollInfoAll.js" ></script>
+<script src="resources/js/searchEnroll.js" ></script>
 <script src="resources/js/dropEnroll.js" ></script>
 <script src="resources/js/logout.js" ></script>
 </body>

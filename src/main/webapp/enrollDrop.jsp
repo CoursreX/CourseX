@@ -40,7 +40,7 @@
                     String studentId = (String) session.getAttribute("user");
 
                     try {
-                        rs = conn.getEnrollDropInfo(studentId);
+                        rs = conn.getEnrollInfoAll(studentId);
                         if(!rs.next()) {
                 %>
                 <tr>
@@ -59,7 +59,7 @@
                     <td class="table__cell"><%= rs.getString("COURSE_ROOM") %></td>
                     <td class="table__cell"><%= rs.getString("COURSE_TIME") %></td>
                     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
-                    <td class="table__cell"><%= rs.getString("CANCEL_DATE") %></td>
+                    <td class="table__cell"><%= rs.getString("DROP_DATE") %></td>
                     <td class="table__cell">
                     <%
                                 if(rs.getInt("ENROLL_STAT") == 2) {

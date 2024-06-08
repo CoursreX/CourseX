@@ -25,28 +25,6 @@
         String endTime = String.format("%02d", Integer.parseInt(endHour)) + ":" + String.format("%02d", Integer.parseInt(endMin));
         String courseTime = startTime + "-" + endTime;
 
-        // 콘솔에 제출된 값 출력 테스트용
-        System.out.println("courseId: " + courseId);
-        System.out.println("courseNo: " + courseNo);
-        System.out.println("facultyName: " + facultyName);
-        System.out.println("facultyId: " + facultyId);
-        System.out.println("courseName: " + courseName);
-        System.out.println("courseCategory: " + courseCategory);
-        System.out.println("selectedDays: " + selectedDays);
-        System.out.println("courseCredit: " + courseCredit);
-        System.out.println("courseCap: " + courseCap);
-        System.out.println("building: " + building);
-        System.out.println("courseRoom: " + courseRoom);
-        System.out.println("startHour: " + startHour);
-        System.out.println("startMin: " + startMin);
-        System.out.println("endHour: " + endHour);
-        System.out.println("endMin: " + endMin);
-        System.out.println("courseLocation: " + courseLocation);
-        System.out.println("startTime: " + startTime);
-        System.out.println("endTime: " + endTime);
-        System.out.println("CourseTme: " + courseTime);
-
-
         Conn dbConn = new Conn();
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -105,7 +83,7 @@
                     errorMessages.add("같은 과목에 대한 과목명이 일치하지 않습니다.");
                 }
                 if (!exCourseCategory.equals(courseCategory)) {
-                    errorMessages.add("같은 과목에 대한 강의 유형이 일치히지 않습니다.");
+                    errorMessages.add("같은 과목에 대한 강의 유형이 일치하지 않습니다.");
                 }
                 if (exCourseCredit != Integer.parseInt(courseCredit)) {
                     errorMessages.add("같은 과목에 대한 학점이 일치하지 않습니다.");
@@ -132,7 +110,7 @@
         rs.close();
         pstmt.close();
 
-        // 시간 확인 - 시작시간이 종료시간보다 빠르면 안됨
+        // 시간 확인 - 시작시간이 종료시간보다 빨라야 함
         // 저장 function 호출
         String checkTimeSql = "{ ? = call CHECK_TIME(?, ?)}";
         cstmt = conn.prepareCall(checkTimeSql);
@@ -143,7 +121,7 @@
 
         int isVaild = cstmt.getInt(1);
         if (isVaild == 0) {
-            errorMessages.add("시작시간은 종료시간보다 빨라야합니다.");
+            errorMessages.add("강의 시간 설정을 확인해주세요.");
         }
         rs.close();
         pstmt.close();
@@ -156,7 +134,6 @@
                 errorMessageBuilder.append(i + 1).append(". ").append(errorMessages.get(i)).append("\\n");
             }
             String errorMessagesFull = errorMessageBuilder.toString();
-            System.out.println(errorMessagesFull);
 
 %>
 

@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@ page import="conn.Conn" %>
-<%@ page import="oracle.jdbc.OracleTypes" %>
-
 <%
     String studentId = (String) session.getAttribute("user");
     String studentName = (String) session.getAttribute("userName");
@@ -21,7 +19,7 @@
     try {
         dbConnection = conn.getConnection();
         // PL/SQL 블록 실행
-        String sql = "{call sumCredit(?, ?, ?, ?, ?)}";
+        String sql = "{call SUM_CREDIT(?, ?, ?, ?, ?)}";
         cstmt = dbConnection.prepareCall(sql);
         cstmt.setString(1, studentId);
         cstmt.setInt(2, year);
@@ -40,7 +38,7 @@
         System.out.println("Total Credits: " + totalCredits); // 터미널 출력
         System.out.println("Has Result: " + hasResults);
 
-        rs = conn.getEnrollInfoAll(studentId, year, semester);
+        rs = conn.searchEnroll(studentId, year, semester);
         while (rs.next()) {
 %>
 <tr>
@@ -53,15 +51,16 @@
     <td class="table__cell"><%= rs.getString("COURSE_DAY") %> <%= rs.getString("COURSE_TIME") %></td>
     <td class="table__cell"><%= rs.getInt("COURSE_CAP") %></td>
     <%
-        String enrollStat = rs.getString("ENROLL_STAT"); // ENROLL_STAT 값 가져오기
-        String colorClass = ""; // 초기 클래스 값
-
-        // ENROLL_STAT 값에 따라 클래스 선택
-        if (enrollStat.equals("신청완료")) {
-            colorClass = "enroll__success";
+        String enrollStat = "";
+        String classColor = "";
+        if (rs.getInt("ENROLL_STAT") == 1) {
+            enrollStat = "신청완료";
+            classColor = "enroll__completed";
+        } else if (rs.getInt("ENROLL_STAT") == 2) {
+            enrollStat = "수강포기";
         }
     %>
-    <td class="table__cell <%= colorClass %>"><%= rs.getString("ENROLL_STAT") %></td>
+    <td class="table__cell <%= classColor %>"><%= enrollStat %></td>
 </tr>
 <script> // getEnrollInfo.js에 신청완료 상태의 총 합, 조회 결과 여부 보내기
 var totalCredits = <%= totalCredits %>;
