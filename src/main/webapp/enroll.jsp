@@ -7,10 +7,16 @@
 
     if (user == null) {
         response.sendRedirect("login.jsp");
-        return;
     }
-%>
 
+    Conn conn = new Conn();
+
+    if(!conn.checkEnrollPeriod()) {
+%>
+<div class="content__left">수강신청 기간이 아닙니다.</div>
+<%
+} else {
+%>
 <div class="content__left">
 
     <div class="enroll__filter">
@@ -78,7 +84,6 @@
             </thead>
             <tbody class="table__body">
             <%
-                Conn conn = new Conn();
                 ResultSet rs = null;
 
                 String searchType = request.getParameter("searchType");
@@ -125,6 +130,9 @@
         </table>
     </div>
 </div>
+<%
+    }
+%>
 <div class="content__right">
     <jsp:include page="/components/userInfo.jsp" />
 </div>
