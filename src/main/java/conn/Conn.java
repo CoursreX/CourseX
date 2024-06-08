@@ -2,6 +2,7 @@ package conn;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class Conn {
     String driver = "oracle.jdbc.driver.OracleDriver";
@@ -30,7 +31,7 @@ public class Conn {
         }
     }
 
-    //과목 정보 조회 메소드
+    //수강신청 가능 과목 정보 조회 메소드
     public ResultSet getCourseInfo(String searchType, String searchValue) {
         ResultSet rs = null;
         String sql = "{call GET_COURSE_INFO(?, ?, ?)}";
@@ -55,6 +56,51 @@ public class Conn {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public String enrollCourse(String studentId, String courseId, Integer courseNo) {
+        String sql = "{call InsertEnroll(?, ?, ?)}";
+        String result = "";
+
+        try {
+            Class.forName(driver);
+            try (Connection myConn = DriverManager.getConnection(url, user, password);
+                 CallableStatement cstmt = myConn.prepareCall(sql)) {
+                cstmt.setString(1, studentId);
+                cstmt.setString(2, courseId);
+                cstmt.setInt(3, courseNo);
+
+                cstmt.execute();
+                result = "수강신청이 완료되었습니다.";
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버 로딩 실패");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            int errorCode = e.getErrorCode();
+            switch (errorCode) {
+                case 20001:
+                    result = "최대학점을 초과하였습니다.";
+                    break;
+                case 20002:
+                    result = "이미 등록된 과목을 신청하였습니다.";
+                    break;
+                case 20003:
+                    result = "수강신청 인원이 초과되어 등록이 불가능합니다.";
+                    break;
+                case 20004:
+                    result = "이미 등록된 과목 중 중복되는 시간이 존재합니다.";
+                    break;
+                default:
+                    result = "예상치 못한 오류가 발생했습니다.";
+                    break;
+            }
+            System.err.println("SQLState: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public ResultSet getEnrollInfoAll(String studentId, int year, int semester) {
@@ -273,7 +319,7 @@ public class Conn {
 
         return isPeriod;
     }
-  
+
     //createCourse_post.jsp
     //addSeats.jsp 검색 기능
     public List<Map<String, Object>> add_searchCourse(String searchOption, String search) {

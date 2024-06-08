@@ -28,6 +28,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="resources/js/searchForm.js"></script>
 <script src="resources/js/getCourseInfo.js"></script>
+<script src="resources/js/enrollButton.js"></script>
+<script src="resources/js/enrollCourse.js"></script>
 <script src="resources/js/cancelEnroll.js" ></script>
 <script src="resources/js/getEnrollInfoAll.js" ></script>
 <script src="resources/js/dropEnroll.js" ></script>

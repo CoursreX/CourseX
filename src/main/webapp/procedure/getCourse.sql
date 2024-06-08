@@ -4,7 +4,7 @@ CREATE OR REPLACE PROCEDURE GET_COURSE_INFO (
     course_cursor OUT SYS_REFCURSOR
 ) IS
 BEGIN
-    IF UPPER(v_search_type) = 'COURSE_ID' THEN
+    IF v_search_type = 'COURSE_ID' THEN
         OPEN course_cursor FOR
             SELECT
                 C.course_id AS "COURSE_ID",
@@ -22,7 +22,7 @@ BEGIN
                      JOIN FACULTY F ON C.faculty_id = F.faculty_id
             WHERE C.course_id = v_search_value;
 
-    ELSIF upper(v_search_type) = 'COURSE_NAME' THEN
+    ELSIF v_search_type = 'COURSE_NAME' THEN
         OPEN course_cursor FOR
             SELECT
                 C.course_id AS "COURSE_ID",
@@ -38,9 +38,9 @@ BEGIN
                 C.is_opened AS "IS_OPENED"
             FROM COURSE C
                      JOIN FACULTY F ON C.faculty_id = F.faculty_id
-            WHERE C.course_name = v_search_value;
+            WHERE LOWER(C.course_name) LIKE '%' || LOWER(v_search_value) || '%';
 
-    ELSIF upper(v_search_type) = 'COURSE_CATEGORY' THEN
+    ELSIF v_search_type = 'COURSE_CATEGORY' THEN
         OPEN course_cursor FOR
             SELECT
                 C.course_id AS "COURSE_ID",
@@ -56,7 +56,7 @@ BEGIN
                 C.is_opened AS "IS_OPENED"
             FROM COURSE C
                      JOIN FACULTY F ON C.faculty_id = F.faculty_id
-            WHERE C.course_category = v_search_value;
+            WHERE LOWER(C.course_category) LIKE '%' || LOWER(v_search_value) || '%';
     ELSE
         -- 검색 유형이 지원되지 않을 경우, 빈 결과 반환
         OPEN course_cursor FOR SELECT * FROM COURSE WHERE 1=0;

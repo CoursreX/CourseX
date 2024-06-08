@@ -1,10 +1,9 @@
 CREATE OR REPLACE PROCEDURE InsertEnroll(
     sStudentId IN VARCHAR2,
     sCourseId IN VARCHAR2,
-    nCourseNo IN NUMBER,
-    result OUT VARCHAR2
+    nCourseNo IN NUMBER
 )
-IS
+    IS
     too_many_sumCourseUnit EXCEPTION;
     too_many_courses EXCEPTION;
     too_many_students EXCEPTION;
@@ -15,12 +14,9 @@ IS
     nSumCourseUnit NUMBER;
     nCourseUnit NUMBER;
     nCnt NUMBER;
-    nTeachMax NUMBER;
-    nCourseCap Number;
+    nCourseCap NUMBER;
     sEnrollId VARCHAR2(20);
 BEGIN
-    result := '';
-
     DBMS_OUTPUT.PUT_LINE('#');
     DBMS_OUTPUT.PUT_LINE(sStudentId || ' 님이 과목번호 ' || sCourseId || ', 분반 ' || TO_CHAR(nCourseNo) || '의 수강 등록을 요청하였습니다.');
 
@@ -66,7 +62,7 @@ BEGIN
     WHERE e.enroll_year = nYear AND e.enroll_sem = nSemester
       AND e.course_id = sCourseId AND e.course_no = nCourseNo;
 
-    IF (nCnt >= nTeachMax) THEN
+    IF (nCnt >= nCourseCap) THEN
         RAISE too_many_students;
     END IF;
 
@@ -74,14 +70,22 @@ BEGIN
     SELECT COUNT(*)
     INTO nCnt
     FROM (
-             SELECT c.course_day, c.course_time
-             FROM course c
-             WHERE c.course_id = sCourseId AND c.course_no = nCourseNo
-             INTERSECT
-             SELECT c.course_day, c.course_time
-             FROM course c
-                      JOIN enroll e ON e.course_id = c.course_id AND e.course_no = c.course_no
-             WHERE e.student_id = sStudentId AND e.enroll_year = nYear AND e.enroll_sem = nSemester
+             SELECT 1
+             FROM course c1
+             WHERE c1.course_id = sCourseId AND c1.course_no = nCourseNo
+               AND EXISTS (
+                 SELECT 1
+                 FROM course c2
+                          JOIN enroll e ON e.course_id = c2.course_id AND e.course_no = c2.course_no
+                 WHERE e.student_id = sStudentId AND e.enroll_year = nYear AND e.enroll_sem = nSemester
+                   AND c1.course_day = c2.course_day
+                   AND CHECK_OVERLAP(
+                               SUBSTR(c1.course_time, 1, 5),
+                               SUBSTR(c1.course_time, 7, 5),
+                               SUBSTR(c2.course_time, 1, 5),
+                               SUBSTR(c2.course_time, 7, 5)
+                           ) = 1
+             )
          );
 
     IF (nCnt > 0) THEN
@@ -113,21 +117,18 @@ BEGIN
                  nYear,
                  nSemester
              );
-
-    COMMIT;
-    result := '수강신청 등록이 완료되었습니다.';
+    UPDATE_CREDIT_LIMIT(sStudentId, sCourseId, 'ENROLL');
 
 EXCEPTION
     WHEN too_many_sumCourseUnit THEN
-        result := '최대학점을 초과하였습니다.';
+        RAISE_APPLICATION_ERROR(-20001, '최대학점을 초과하였습니다.');
     WHEN too_many_courses THEN
-        result := '이미 등록된 과목을 신청하였습니다.';
+        RAISE_APPLICATION_ERROR(-20002, '이미 등록된 과목을 신청하였습니다.');
     WHEN too_many_students THEN
-        result := '수강신청 인원이 초과되어 등록이 불가능합니다.';
+        RAISE_APPLICATION_ERROR(-20003, '수강신청 인원이 초과되어 등록이 불가능합니다.');
     WHEN duplicate_time THEN
-        result := '이미 등록된 과목 중 중복되는 시간이 존재합니다.';
+        RAISE_APPLICATION_ERROR(-20004, '이미 등록된 과목 중 중복되는 시간이 존재합니다.');
     WHEN OTHERS THEN
-        ROLLBACK;
-        result := SQLCODE;
+        RAISE_APPLICATION_ERROR(-20005, '예상치 못한 오류가 발생했습니다.');
 END;
 /

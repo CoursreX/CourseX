@@ -6,3 +6,76 @@
     border-radius: 25px;
     background-color: var(--grey-scale-10);
 }
+
+.enroll_input {
+    width: 300px;
+    margin: 0px 20px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    background-color: var(--grey-scale-15);
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+
+}
+
+.enroll_search__button {
+    height: 100%;
+    padding: 10px 16px;
+    border-radius: 50px;
+    border:none;
+    outline:none;
+    background-color: var(--primary-blue);
+    font: var(--text-sm);
+    color: var(--grey-scale-transparent-2);
+    cursor: pointer;
+}
+
+.enroll_search__button:active {
+    filter: brightness(1.2);
+}
+
+.enroll__filter__container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.enroll__filter__container select {
+    width: 150px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background:url('../assets/down_arrow.svg') no-repeat 95% 50%/12px auto;
+    background-color: var(--grey-scale-15);
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+    font: var(--text-md);
+    margin: 0px 20px;
+}
+
+.search__result {
+    padding: 40px;
+    border-radius: 25px;
+    background-color: var(--grey-scale-10);
+}
+
+
+.enrollButton {
+    padding: 4px 14px;
+    border-radius: 50px;
+    background-color: var(--primary-blue);
+    border: none;
+    outline: none;
+    font: var(--text-sm);
+    color: var(--grey-scale-transparent-2);
+    cursor: pointer;
+}
+
+.enrollButton:active {
+    filter: brightness(1.2);
+}
