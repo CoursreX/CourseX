@@ -19,7 +19,7 @@
         <ol>
             <li><strong>수강신청 메뉴 접근</strong>
                 <ul>
-                    <li>왼쪽 사이드바에 "수강신청" 메뉴가 있습니다. 해당 메뉴에 들어갑니다.</li>
+                    <li>왼쪽 사이드바에서 "수강신청" 메뉴를 선택합니다.</li>
                 </ul>
             </li>
             <li><strong>과목 검색</strong>
@@ -136,6 +136,35 @@
             <li><strong>수강신청한 과목 없음</strong>
                 <ul>
                     <li>수강신청한 과목이 없을 경우 "수강신청된 과목이 없습니다"라는 문구가 표시됩니다.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="menu__item6">
+        <h2>5. 비밀번호 재설정</h2>
+        <img src="resources/image/guide_6.png" alt="수강취소 이미지">
+        <ol>
+            <li><strong>비밀번호 재설정 메뉴 접근</strong>
+                <ul>
+                    <li>왼쪽 사이드바에서 "비밀번호 재설정" 메뉴를 선택합니다.</li>
+                </ul>
+            </li>
+            <li><strong>학번 입력</strong>
+                <ul>
+                    <li>학번을 입력하고 "send" 버튼을 누릅니다.</li>
+                </ul>
+            </li>
+            <li><strong>인증번호 입력</strong>
+                <ul>
+                    <li>입력한 학번에 등록된 이메일로 인증번호가 전송됩니다.</li>
+                    <li>받은 인증번호를 입력합니다.</li>
+                </ul>
+            </li>
+            <li><strong>비밀번호 재설정</strong>
+                <ul>
+                    <li>인증번호가 일치하면 비밀번호를 재설정할 수 있는 페이지로 이동합니다.</li>
+                    <li>변경할 비밀번호를 입력합니다.</li>
                 </ul>
             </li>
         </ol>
