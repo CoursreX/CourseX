@@ -146,7 +146,7 @@
 } else {
 
     // IS_EXPANDED 고유 값 생성
-    String expandedIdSql = "SELECT 'CA' || TO_CHAR(my_sequence.NEXTVAL, 'FM000') AS expandedId FROM dual";
+    String expandedIdSql = "SELECT 'CA' || TO_CHAR(IS_EXPANDED_SEQ.NEXTVAL, 'FM000') AS expandedId FROM dual";
     pstmt = conn.prepareStatement(expandedIdSql);
     rs = pstmt.executeQuery();
     if (rs.next()) {
