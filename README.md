@@ -5,14 +5,15 @@
 
 | 담당자 |담당 내용|
 |:----|:---|
-| 송한나 ||
-| 송희원 ||
-| 양서영 ||
-| 장아현 ||
+| 송한나 | 로그인, 로그아웃, 비밀번호 재설정, 보고서 작성, 발표자료 제작 |
+| 송희원 | 수강취소, 수강조회, 수강포기, 디자인 시스템 구축, 보고서 작성, 발표자료 제작 |
+| 양서영 | 메인페이지, 수강신청 과목 조회, 수강신청, 보고서 구축 및 작성, 발표 |
+| 장아현 | (관리자용) 메인페이지, 강의등록, 여석증원, 증원이력, 보고서 작성, 발표 |
 
 ## 💻 Development Environment
-- Flutter
-- Visual Studio Code
+- Programming Languages : Java, JSP
+- Database : Oracle SQL*Plus
+- IDE : IntelliJ IDEA
 
 <br>
 
