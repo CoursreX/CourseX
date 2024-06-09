@@ -11,10 +11,11 @@ CREATE OR REPLACE PROCEDURE InsertEnroll(
 
     nYear NUMBER;
     nSemester NUMBER;
-    nSumCourseUnit NUMBER;
-    nCourseUnit NUMBER;
+    nCourseCredit NUMBER;
     nCnt NUMBER;
     nCourseCap NUMBER;
+    nCourseApplicant NUMBER;
+    nCreditLimit NUMBER;
     sEnrollId VARCHAR2(20);
 BEGIN
     DBMS_OUTPUT.PUT_LINE('#');
@@ -25,18 +26,17 @@ BEGIN
     nSemester := CASE WHEN EXTRACT(MONTH FROM SYSDATE) BETWEEN 3 AND 8 THEN 1 ELSE 2 END;
 
     /* 에러처리1: 최대학점 초과여부 */
-    SELECT SUM(c.course_credit)
-    INTO nSumCourseUnit
-    FROM course c
-             JOIN enroll e ON e.course_id = c.course_id AND e.course_no = c.course_no
-    WHERE e.student_id = sStudentId AND e.enroll_year = nYear AND e.enroll_sem = nSemester;
+    SELECT CREDIT_LIMIT
+    INTO nCreditLimit
+    FROM STUDENT
+    WHERE student_id = sStudentId;
 
-    SELECT course_credit
-    INTO nCourseUnit
-    FROM course
+    SELECT COURSE_CREDIT
+    INTO nCourseCredit
+    FROM COURSE
     WHERE course_id = sCourseId AND course_no = nCourseNo;
 
-    IF (nSumCourseUnit + nCourseUnit > 18) THEN
+    IF (nCourseCredit > nCreditlimit) THEN
         RAISE too_many_sumCourseUnit;
     END IF;
 
@@ -51,18 +51,12 @@ BEGIN
     END IF;
 
     /* 에러처리3: 수강신청 인원초과여부 */
-    SELECT c.course_cap
-    INTO nCourseCap
-    FROM course c
-    WHERE c.course_id = sCourseId AND c.course_no = nCourseNo;
+    SELECT COURSE_CAP, COURSE_ENROLLED
+    INTO nCourseCap, nCourseApplicant
+    FROM COURSE
+    WHERE course_id = sCourseId AND course_no = nCourseNo;
 
-    SELECT COUNT(*)
-    INTO nCnt
-    FROM enroll e
-    WHERE e.enroll_year = nYear AND e.enroll_sem = nSemester
-      AND e.course_id = sCourseId AND e.course_no = nCourseNo;
-
-    IF (nCnt >= nCourseCap) THEN
+    IF (nCourseApplicant >= nCourseCap) THEN
         RAISE too_many_students;
     END IF;
 
@@ -120,6 +114,7 @@ BEGIN
                  1
              );
     UPDATE_CREDIT_LIMIT(sStudentId, sCourseId, 'ENROLL');
+    UPDATE_COURSE_SEATS(sCourseId, nCourseNo, 'ENROLL');
 
 EXCEPTION
     WHEN too_many_sumCourseUnit THEN

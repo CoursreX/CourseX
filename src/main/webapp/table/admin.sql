@@ -8,4 +8,8 @@ CREATE TABLE ADMIN (
 );
 
 INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD001', '0000', '관리송', 'admin_snow@sm.ac.kr', '학사관리팀');
-INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD002', '0000', '등록송', 'enroll_snow@sm.ac.kr', '교과관리팀');
+INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD002', '12345', '등록송', 'enroll_snow@sm.ac.kr', '교과관리팀');
+INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD003', '00000', '관리송이', 'admin01_snow@sm.ac.kr', '학사관리팀');
+INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD004', 'sook!', '등록송이', 'enroll2_snow@sm.ac.kr', '교과관리팀');
+INSERT INTO ADMIN (ADMIN_ID, ADMIN_PW, ADMIN_NAME, ADMIN_EMAIL, ADMIN_DEPT) VALUES ('AD005', 'myung!', '리자', 'enroll02_snow@sm.ac.kr', '교무관리팀');
+
